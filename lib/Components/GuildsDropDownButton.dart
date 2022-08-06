@@ -47,7 +47,8 @@ class GuildsDropDownButton extends StatelessWidget {
                     value: snapshot.data == null
                         ? "No connected guild"
                         : snapshot.data!.first.name,
-                    style: TextStyleHelper.defaultTextInputStyle,
+                    style: TextStyleHelper.getTextStyleHelper(context)
+                        .defaultTextInputStyle,
                     onChanged: (value) {
                       if (snapshot.data != null) {
                         guildIdCallback(snapshot.data!
@@ -55,26 +56,29 @@ class GuildsDropDownButton extends StatelessWidget {
                             .id);
                       }
                     },
-                    barrierColor:
-                        ColorHelper.dropdownButtonColors.defaultBarrierColor,
+                    barrierColor: ColorHelper.getColorHelper(context)
+                        .dropdownButtonColors
+                        .defaultBarrierColor,
                     iconSize: 4.sp,
-                    iconEnabledColor:
-                        ColorHelper.dropdownButtonColors.defaultIconEnableColor,
-                    iconDisabledColor: ColorHelper
-                        .dropdownButtonColors.defaultIconDisabledColor,
+                    iconEnabledColor: ColorHelper.getColorHelper(context)
+                        .dropdownButtonColors
+                        .defaultIconEnableColor,
+                    iconDisabledColor: ColorHelper.getColorHelper(context)
+                        .dropdownButtonColors
+                        .defaultIconDisabledColor,
                     buttonHeight: 8.h,
                     buttonWidth: MediaQuery.of(context).size.width,
                     buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                     buttonDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: ColorHelper.activeColor,
+                        color: ColorHelper.getColorHelper(context).activeColor,
                       ),
                       color: Colors.transparent,
                     ),
                     dropdownDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
-                      color: ColorHelper.activeColor,
+                      color: ColorHelper.getColorHelper(context).activeColor,
                     ),
                     dropdownMaxHeight: 200,
                     dropdownWidth: 24.w,
@@ -85,15 +89,16 @@ class GuildsDropDownButton extends StatelessWidget {
                 }
               case ConnectionState.waiting:
                 {
-                  return const CircularProgressIndicator(
-                    color: ColorHelper.activeColor,
+                  return CircularProgressIndicator(
+                    color: ColorHelper.getColorHelper(context).activeColor,
                   );
                 }
               default:
                 {
                   return Center(
                     child: Text("No data",
-                        style: TextStyleHelper.defaultTextStyle),
+                        style: TextStyleHelper.getTextStyleHelper(context)
+                            .defaultTextStyle),
                   );
                 }
             }

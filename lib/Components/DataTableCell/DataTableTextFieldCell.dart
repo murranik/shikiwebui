@@ -36,12 +36,15 @@ class DataTableTextFieldCell extends StatelessWidget
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color:
-                        ColorHelper.dataTableCellColors.defaultBoxShadowColor)
+                    color: ColorHelper.getColorHelper(context)
+                        .dataTableCellColors
+                        .defaultBoxShadowColor)
               ],
               color: backgroundColor ?? Colors.transparent,
               border: Border.fromBorderSide(BorderSide(
-                color: ColorHelper.dataTableCellColors.defaultBorderColor,
+                color: ColorHelper.getColorHelper(context)
+                    .dataTableCellColors
+                    .defaultBorderColor,
                 width: 0.5.sp,
               ))),
           child: Row(
@@ -50,7 +53,9 @@ class DataTableTextFieldCell extends StatelessWidget
                   child: TextField(
                 controller: editController,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                style: TextStyleHelper.defaultTextStyle.withFontSize(4.sp),
+                style: TextStyleHelper.getTextStyleHelper(context)
+                    .defaultTextStyle
+                    .withFontSize(4.sp),
               ))
             ],
           )),

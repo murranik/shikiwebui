@@ -2,6 +2,7 @@ import 'package:discordbotadminui/Components/ServerStatus.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Pages/NotFoundPage.dart';
 import 'package:discordbotadminui/Pages/RolesPage.dart';
+import 'package:discordbotadminui/Pages/SettingsPage.dart';
 import 'package:discordbotadminui/Pages/UsersPage.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var navButtonsList = [ColorHelper.activeColor, null, null];
+  var navButtonsList = [];
+
+  @override
+  void initState() {
+    navButtonsList = [
+      ColorHelper.getColorHelper(context).activeColor,
+      null,
+      null,
+      null
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,8 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           flex: 1,
           child: Container(
-            color: ColorHelper.defaultNavMenuBackgroundColor,
+            color: ColorHelper.getColorHelper(context)
+                .defaultNavMenuBackgroundColor,
             padding: EdgeInsets.symmetric(horizontal: 3.sp),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,9 +52,11 @@ class _HomePageState extends State<HomePage> {
                         text: "Home",
                         onClick: () {
                           if (UserService.getUser().logedIn) {
-                            navButtonsList[0] = ColorHelper.activeColor;
+                            navButtonsList[0] =
+                                ColorHelper.getColorHelper(context).activeColor;
                             navButtonsList[1] = null;
                             navButtonsList[2] = null;
+                            navButtonsList[3] = null;
                             setState(() {});
                           }
                         },
@@ -53,8 +68,10 @@ class _HomePageState extends State<HomePage> {
                         onClick: () {
                           if (UserService.getUser().logedIn) {
                             navButtonsList[0] = null;
-                            navButtonsList[1] = ColorHelper.activeColor;
+                            navButtonsList[1] =
+                                ColorHelper.getColorHelper(context).activeColor;
                             navButtonsList[2] = null;
+                            navButtonsList[3] = null;
                             setState(() {});
                           }
                         },
@@ -67,11 +84,28 @@ class _HomePageState extends State<HomePage> {
                           if (UserService.getUser().logedIn) {
                             navButtonsList[0] = null;
                             navButtonsList[1] = null;
-                            navButtonsList[2] = ColorHelper.activeColor;
+                            navButtonsList[2] =
+                                ColorHelper.getColorHelper(context).activeColor;
+                            navButtonsList[3] = null;
                             setState(() {});
                           }
                         },
                         choosedColor: navButtonsList[2],
+                        locked: !UserService.getUser().logedIn,
+                      ),
+                      NavMenuButton(
+                        text: "Settings",
+                        onClick: () {
+                          if (UserService.getUser().logedIn) {
+                            navButtonsList[0] = null;
+                            navButtonsList[1] = null;
+                            navButtonsList[2] = null;
+                            navButtonsList[3] =
+                                ColorHelper.getColorHelper(context).activeColor;
+                            setState(() {});
+                          }
+                        },
+                        choosedColor: navButtonsList[3],
                         locked: !UserService.getUser().logedIn,
                       ),
                     ],
@@ -84,9 +118,10 @@ class _HomePageState extends State<HomePage> {
                       }
                     },
                     iconSize: 6.sp,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.person,
-                      color: ColorHelper.defaultNavMenuTextColor,
+                      color: ColorHelper.getColorHelper(context)
+                          .defaultNavMenuTextColor,
                     ))
               ],
             ),
@@ -104,6 +139,8 @@ class _HomePageState extends State<HomePage> {
                     return const RolesPage();
                   } else if (navButtonsList[0] != null) {
                     return const ServerStatusComponent();
+                  } else if (navButtonsList[3] != null) {
+                    return const SettingsPage();
                   } else {
                     return const NotFoundPage();
                   }

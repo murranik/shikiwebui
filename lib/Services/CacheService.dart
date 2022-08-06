@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:discordbotadminui/Models/Administrator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CacheServices {
+class CacheService {
   static late SharedPreferences _sharedPrefs;
 
   static Future init() async {
@@ -11,6 +11,16 @@ class CacheServices {
   }
 
   static SharedPreferences getPrefs() => _sharedPrefs;
+
+  static setTheme(bool value) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool("darkTheme", value);
+  }
+
+  static getTheme() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool("darkTheme") ?? false;
+  }
 
   static Future saveUser(Administrator administrator) async {
     await _sharedPrefs.setString(

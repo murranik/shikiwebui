@@ -30,7 +30,7 @@ class NavMenuButton extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
-                color: ColorHelper.activeColor,
+                color: ColorHelper.getColorHelper(context).activeColor,
               ),
               padding: EdgeInsets.only(left: 0.5.w, right: 0.5.w, top: 0.5.h),
               child: Row(children: [
@@ -38,13 +38,15 @@ class NavMenuButton extends StatelessWidget {
                   Icon(
                     Icons.lock,
                     size: 4.sp,
-                    color: ColorHelper.defaultNavMenuTextColor,
+                    color: ColorHelper.getColorHelper(context)
+                        .defaultNavMenuTextColor,
                   ),
                 InkWell(
                   onTap: () => onClick(),
                   child: Text(
                     text,
-                    style: TextStyleHelper.defaultNavMenuTextStyle,
+                    style: TextStyleHelper.getTextStyleHelper(context)
+                        .defaultNavMenuTextStyle,
                   ),
                 ),
               ]))),

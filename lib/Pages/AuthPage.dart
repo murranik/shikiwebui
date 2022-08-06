@@ -61,13 +61,17 @@ class _AuthPageState extends State<AuthPage> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorHelper.serverStatusColors.defaultShadowColor,
+                    color: ColorHelper.getColorHelper(context)
+                        .serverStatusColors
+                        .defaultShadowColor,
                     spreadRadius: 5,
                     blurRadius: 7,
                     offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
-                color: ColorHelper.serverStatusColors.defaultBackgroundColor,
+                color: ColorHelper.getColorHelper(context)
+                    .serverStatusColors
+                    .defaultBackgroundColor,
               ),
               child: Container(
                 margin: EdgeInsets.all(3.sp),
@@ -77,8 +81,9 @@ class _AuthPageState extends State<AuthPage> {
                   children: [
                     Text(
                       "Login",
-                      style:
-                          TextStyleHelper.defaultTextStyle.withFontSize(12.sp),
+                      style: TextStyleHelper.getTextStyleHelper(context)
+                          .defaultTextStyle
+                          .withFontSize(12.sp),
                     ),
                     Form(
                         autovalidateMode: AutovalidateMode.always,
@@ -119,8 +124,9 @@ class _AuthPageState extends State<AuthPage> {
                           margin: EdgeInsets.all(3.sp),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
-                              border:
-                                  Border.all(color: ColorHelper.activeColor)),
+                              border: Border.all(
+                                  color: ColorHelper.getColorHelper(context)
+                                      .activeColor)),
                           child: InkWell(
                             mouseCursor: SystemMouseCursors.click,
                             borderRadius: BorderRadius.circular(25),
@@ -130,7 +136,9 @@ class _AuthPageState extends State<AuthPage> {
                                 child: Text(
                                   "Continue",
                                   textAlign: TextAlign.center,
-                                  style: TextStyleHelper.defaultTextStyle,
+                                  style: TextStyleHelper.getTextStyleHelper(
+                                          context)
+                                      .defaultTextStyle,
                                 )),
                           ),
                         )),

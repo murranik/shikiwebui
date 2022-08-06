@@ -5,16 +5,18 @@ import 'package:discordbotadminui/Pages/NotFoundPage.dart';
 import 'package:discordbotadminui/Pages/RolesPage.dart';
 import 'package:discordbotadminui/Pages/SystemMessagePage.dart';
 import 'package:discordbotadminui/Pages/UsersPage.dart';
+import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:discordbotadminui/Services/CacheService.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
-  await CacheServices.init();
+  await CacheService.init();
   UserService.loadUser();
   runApp(const MyApp());
 }
@@ -81,30 +83,37 @@ class MyApp extends StatelessWidget {
         ),
       ],
     );
-
-    return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp.router(
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
-        routerDelegate: router.routerDelegate,
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          textTheme: buildTheme(Brightness.dark).textTheme,
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: kIsWeb
-                ? {
-                    // No animations for every OS if the app running on the web
-                    for (final platform in TargetPlatform.values)
-                      platform: const NoTransitionsBuilder(),
-                  }
-                : const {
-                    // handel other platforms you are targeting
-                  },
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+          builder: (context, ThemeProvider themeNotifier, child) {
+        return Sizer(
+          builder: (context, orientation, deviceType) => MaterialApp.router(
+            routeInformationParser: router.routeInformationParser,
+            routeInformationProvider: router.routeInformationProvider,
+            routerDelegate: router.routerDelegate,
+            theme: ThemeData(
+              primarySwatch: Colors.green,
+              brightness:
+                  themeNotifier.isDark ? Brightness.dark : Brightness.light,
+              textTheme: buildTheme(Brightness.dark).textTheme,
+              pageTransitionsTheme: PageTransitionsTheme(
+                builders: kIsWeb
+                    ? {
+                        // No animations for every OS if the app running on the web
+                        for (final platform in TargetPlatform.values)
+                          platform: const NoTransitionsBuilder(),
+                      }
+                    : const {
+                        // handel other platforms you are targeting
+                      },
+              ),
+            ),
+            debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.dark,
           ),
-        ),
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.dark,
-      ),
+        );
+      }),
     );
   }
 }
@@ -119,9 +128,10 @@ ThemeData buildTheme(brightness) {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
+  void printSample() {}
 }
 
 class _MyHomePageState extends State<MyHomePage> {
