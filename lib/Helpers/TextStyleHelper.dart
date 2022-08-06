@@ -15,7 +15,7 @@ class TextStyleHelper {
             color: ColorHelper.getColorHelper(context).defaultTextColor),
         defaultNavMenuTextStyle: TextStyle(
             fontSize: 4.sp,
-            color: ColorHelper.getColorHelper(context).defaultTextColor),
+            color: ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
         defaultServerStatusTextStyle: TextStyle(
             fontSize: 9.sp,
             color: ColorHelper.getColorHelper(context)
@@ -24,8 +24,7 @@ class TextStyleHelper {
         defaultTextInputStyle: GoogleFonts.lato(
           textStyle: TextStyle(
               fontSize: 4.sp,
-              color:
-                  ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
+              color: ColorHelper.getColorHelper(context).defaultTextColor),
         ),
       );
     } else {
@@ -35,7 +34,7 @@ class TextStyleHelper {
             color: ColorHelper.getColorHelper(context).defaultTextColor),
         defaultNavMenuTextStyle: TextStyle(
             fontSize: 4.sp,
-            color: ColorHelper.getColorHelper(context).defaultTextColor),
+            color: ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
         defaultServerStatusTextStyle: TextStyle(
             fontSize: 9.sp,
             color: ColorHelper.getColorHelper(context)
@@ -44,8 +43,7 @@ class TextStyleHelper {
         defaultTextInputStyle: GoogleFonts.lato(
           textStyle: TextStyle(
               fontSize: 4.sp,
-              color:
-                  ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
+              color: ColorHelper.getColorHelper(context).defaultTextColor),
         ),
       );
     }
