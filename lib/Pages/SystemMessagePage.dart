@@ -17,7 +17,9 @@ class SystemMessagePage extends StatelessWidget {
       child: Center(
           child: Text(
         message,
-        style: TextStyleHelper.defaultTextStyle.withFontSize(10.sp),
+        style: TextStyleHelper.getTextStyleHelper(context)
+            .defaultTextStyle
+            .withFontSize(10.sp),
         textAlign: TextAlign.center,
       )),
     );

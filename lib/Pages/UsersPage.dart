@@ -142,7 +142,8 @@ class _UsersPageState extends State<UsersPage> {
                       return Expanded(
                           child: Center(
                         child: Text("No data",
-                            style: TextStyleHelper.defaultTextStyle),
+                            style: TextStyleHelper.getTextStyleHelper(context)
+                                .defaultTextStyle),
                       ));
                     }
                   case ConnectionState.waiting:
@@ -152,8 +153,9 @@ class _UsersPageState extends State<UsersPage> {
                             child: SizedBox(
                               width: 20.sp,
                               height: 20.sp,
-                              child: const CircularProgressIndicator(
-                                color: ColorHelper.activeColor,
+                              child: CircularProgressIndicator(
+                                color: ColorHelper.getColorHelper(context)
+                                    .activeColor,
                               ),
                             )));
                   default:
@@ -162,7 +164,8 @@ class _UsersPageState extends State<UsersPage> {
                       child: Text("No data default",
                           style: TextStyle(
                               fontSize: 10.sp,
-                              color: ColorHelper.defaultTextColor)),
+                              color: ColorHelper.getColorHelper(context)
+                                  .defaultTextColor)),
                     ));
                 }
               },
@@ -174,7 +177,9 @@ class _UsersPageState extends State<UsersPage> {
       return Center(
         child: Text(
           'Please login first before using this page',
-          style: TextStyle(color: ColorHelper.cancelColor, fontSize: 14.sp),
+          style: TextStyle(
+              color: ColorHelper.getColorHelper(context).cancelColor,
+              fontSize: 14.sp),
         ),
       );
     }

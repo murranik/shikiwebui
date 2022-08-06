@@ -27,16 +27,22 @@ class DataTableCell extends StatelessWidget implements DataTableCellInterface {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  color: ColorHelper.dataTableCellColors.defaultBoxShadowColor)
+                  color: ColorHelper.getColorHelper(context)
+                      .dataTableCellColors
+                      .defaultBoxShadowColor)
             ],
             color: backgroundColor ?? Colors.transparent,
             border: Border.fromBorderSide(BorderSide(
-              color: ColorHelper.dataTableCellColors.defaultBorderColor,
+              color: ColorHelper.getColorHelper(context)
+                  .dataTableCellColors
+                  .defaultBorderColor,
               width: 0.5.sp,
             ))),
         child: Text(
           name,
-          style: TextStyleHelper.defaultTextStyle.withFontSize(4.sp),
+          style: TextStyleHelper.getTextStyleHelper(context)
+              .defaultTextStyle
+              .withFontSize(4.sp),
         ),
       ),
     );

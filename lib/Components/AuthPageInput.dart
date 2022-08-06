@@ -45,7 +45,8 @@ class _AuthPageInputState extends State<AuthPageInput> {
             Expanded(
               child: TextFormField(
                 autofillHints: [widget.autofillHint],
-                style: TextStyleHelper.defaultTextInputStyle,
+                style: TextStyleHelper.getTextStyleHelper(context)
+                    .defaultTextInputStyle,
                 obscureText: widget.validationType == ValidationTypes.email
                     ? false
                     : _obscureText,
@@ -99,13 +100,15 @@ class _AuthPageInputState extends State<AuthPageInput> {
                                   : const Icon(Icons.visibility),
                             ),
                           valid
-                              ? const Icon(
+                              ? Icon(
                                   Icons.done,
-                                  color: ColorHelper.activeColor,
+                                  color: ColorHelper.getColorHelper(context)
+                                      .activeColor,
                                 )
-                              : const Icon(
+                              : Icon(
                                   Icons.close,
-                                  color: ColorHelper.cancelColor,
+                                  color: ColorHelper.getColorHelper(context)
+                                      .cancelColor,
                                 ),
                         ],
                       ),
@@ -115,20 +118,24 @@ class _AuthPageInputState extends State<AuthPageInput> {
                         color: const Color.fromARGB(150, 0, 0, 0)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: ColorHelper.activeColor)),
+                        borderSide: BorderSide(
+                            color: ColorHelper.getColorHelper(context)
+                                .activeColor)),
                     errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: ColorHelper.activeColor)),
+                        borderSide: BorderSide(
+                            color: ColorHelper.getColorHelper(context)
+                                .activeColor)),
                     focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: ColorHelper.activeColor)),
+                        borderSide: BorderSide(
+                            color: ColorHelper.getColorHelper(context)
+                                .activeColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
-                        borderSide:
-                            const BorderSide(color: ColorHelper.activeColor))),
+                        borderSide: BorderSide(
+                            color: ColorHelper.getColorHelper(context)
+                                .activeColor))),
               ),
             ),
           ],

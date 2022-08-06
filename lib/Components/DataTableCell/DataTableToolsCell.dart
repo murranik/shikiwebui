@@ -40,14 +40,21 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color:
-                        ColorHelper.dataTableCellColors.defaultBoxShadowColor)
+                    color: ColorHelper.getColorHelper(context)
+                        .dataTableCellColors
+                        .defaultBoxShadowColor)
               ],
               color: widget.edit
-                  ? ColorHelper.dataTableCellColors.defaultEditColor
-                  : ColorHelper.dataTableCellColors.defaultBoxShadowColor,
+                  ? ColorHelper.getColorHelper(context)
+                      .dataTableCellColors
+                      .defaultEditColor
+                  : ColorHelper.getColorHelper(context)
+                      .dataTableCellColors
+                      .defaultBoxShadowColor,
               border: Border.fromBorderSide(BorderSide(
-                color: ColorHelper.dataTableCellColors.defaultBorderColor,
+                color: ColorHelper.getColorHelper(context)
+                    .dataTableCellColors
+                    .defaultBorderColor,
                 width: 0.5.sp,
               ))),
           child: Row(
@@ -66,8 +73,8 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
                     icon: Icon(
                       widget.edit ? Icons.cancel : Icons.edit,
                       color: widget.edit
-                          ? ColorHelper.cancelColor
-                          : ColorHelper.activeColor,
+                          ? ColorHelper.getColorHelper(context).cancelColor
+                          : ColorHelper.getColorHelper(context).activeColor,
                     )),
               ),
               if (widget.edit)
@@ -84,9 +91,9 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
                           widget.callBack(!widget.edit);
                         }
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.check_circle_outline,
-                        color: ColorHelper.activeColor,
+                        color: ColorHelper.getColorHelper(context).activeColor,
                       )),
                 )
             ],

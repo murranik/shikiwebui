@@ -1,5 +1,4 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,12 +16,18 @@ class NotFoundPage extends StatelessWidget {
         Center(
             child: Text(
           "404\nPage not found",
-          style: TextStyleHelper.defaultTextStyle.withFontSize(10.sp),
+          style: TextStyleHelper.getTextStyleHelper(context)
+              .defaultTextStyle
+              .withFontSize(10.sp),
           textAlign: TextAlign.center,
         )),
         TextButton(
             onPressed: () => (GoRouter.of(context).go("/")),
-            child: Text("home"))
+            child: Text(
+              "home",
+              style:
+                  TextStyleHelper.getTextStyleHelper(context).defaultTextStyle,
+            ))
       ],
     ));
   }

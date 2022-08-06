@@ -21,7 +21,9 @@ class ConfirmEmailPage extends StatelessWidget {
         Center(
           child: Text(
             "Email succsessfully confirmed",
-            style: TextStyleHelper.defaultTextStyle.withFontSize(10.sp),
+            style: TextStyleHelper.getTextStyleHelper(context)
+                .defaultTextStyle
+                .withFontSize(10.sp),
             textAlign: TextAlign.center,
           ),
         ),
@@ -30,7 +32,7 @@ class ConfirmEmailPage extends StatelessWidget {
             GoRouter.of(context).go("/");
           },
           seconds: 5,
-          textColor: ColorHelper.defaultTextColor,
+          textColor: ColorHelper.getColorHelper(context).defaultTextColor,
           timePrefix: "Redirect after ",
         ),
       ],

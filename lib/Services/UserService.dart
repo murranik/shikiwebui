@@ -10,12 +10,12 @@ class UserService {
   static getUser() => _user;
 
   static Future saveUser(Administrator administrator) async {
-    await CacheServices.saveUser(administrator);
+    await CacheService.saveUser(administrator);
     _user = administrator;
   }
 
   static loadUser() {
-    var data = CacheServices.loadUser();
+    var data = CacheService.loadUser();
     if (data != null) {
       _user = Administrator.fromMap(json.decoder.convert(data));
     }
