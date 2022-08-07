@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Color(0xff00010D),
       child: Column(children: [
         Expanded(
           flex: 1,
