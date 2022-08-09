@@ -86,24 +86,60 @@ class _SettingsPageState extends State<SettingsPage> {
                                   themeNotifier.theme =
                                       themeNotifier.themes[index];
                                 },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    stops: [.5, .5],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: [
-                                      ColorHelper.getColorHelper(context,
-                                              theme:
-                                                  themeNotifier.themes[index])
-                                          .defaultAppBackGroundColor,
-                                      ColorHelper.getColorHelper(context,
-                                              theme:
-                                                  themeNotifier.themes[index])
-                                          .activeColor, // top Right part
-                                    ],
-                                  ),
-                                )),
+                                child: themeNotifier.themes[index] == "dynamic"
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          stops: [.5, .5],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .defaultAppBackGroundColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .cancelColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .activeColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .defaultNavMenuTextColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .editColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .serverStatusColors
+                                                .offlineColor,
+                                          ],
+                                        ),
+                                      ))
+                                    : Container(
+                                        decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          stops: [.5, .5],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .defaultAppBackGroundColor,
+                                            ColorHelper.getColorHelper(context,
+                                                    theme: themeNotifier
+                                                        .themes[index])
+                                                .activeColor, // top Right part
+                                          ],
+                                        ),
+                                      )),
                               );
                             }
                           },
