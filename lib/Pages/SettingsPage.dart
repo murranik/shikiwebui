@@ -90,7 +90,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                     ? Container(
                                         decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          stops: [.5, .5],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                           colors: [
