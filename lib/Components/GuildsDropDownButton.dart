@@ -15,7 +15,6 @@ class GuildsDropDownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 3.sp),
-      height: 8.h,
       child: FutureBuilder(
           future: DiscordBotApiService.fetchData<AdministrationGuild>(
               "https://localhost:5001/api/Get/SocketGuild"),
@@ -30,9 +29,14 @@ class GuildsDropDownButton extends StatelessWidget {
                       child: DropdownButton2(
                     items: snapshot.data == null
                         ? [
-                            const DropdownMenuItem<String>(
+                            DropdownMenuItem<String>(
                               value: "No connected guild",
-                              child: Text("No connected guild"),
+                              child: Text(
+                                "No connected guild",
+                                style:
+                                    TextStyleHelper.getTextStyleHelper(context)
+                                        .defaultTextInputStyle,
+                              ),
                             )
                           ]
                         : snapshot.data!

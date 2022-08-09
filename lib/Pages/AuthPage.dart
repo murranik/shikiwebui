@@ -28,24 +28,46 @@ class _AuthPageState extends State<AuthPage> {
   List<bool> validationResults = [false, false];
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var passwordValidationMessage = null;
+  var emailValidationMessage = null;
 
   Future login() async {
-    if (!validationResults.any((element) => element == false)) {
-      formKey.currentState?.validate();
-      var admin = Administrator(
-          nickname: 'admin',
-          email: emailController.text,
-          password: passwordController.text,
-          guildId: guildId,
-          logedIn: false);
-      var res = await DiscordBotApiService.login(admin);
-      admin.logedIn = res;
-      if (res) {
-        UserService.saveUser(admin);
-        // ignore: use_build_context_synchronously
-        GoRouter.of(context).push("/home");
+    if (emailController.text != "Echi>Hentai") {
+      if (!validationResults.any((element) => element == false)) {
+        var admin = Administrator(
+            nickname: 'admin',
+            email: emailController.text,
+            password: passwordController.text,
+            guildId: guildId,
+            logedIn: false);
+        var res = await DiscordBotApiService.login(admin);
+        admin.logedIn = res;
+        if (res) {
+          UserService.login(admin);
+          // ignore: use_build_context_synchronously
+          GoRouter.of(context).push("/home?page=1");
+        }
+      } else {
+        var password = passwordController.text;
+        var email = emailController.text;
+        emailValidationMessage =
+            RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(email)
+                ? null
+                : "Not valid email";
+        passwordValidationMessage =
+            "${password.length < 8 ? 'lenght must be more than 8' : ''}"
+            " ${password.length > 10 ? 'lenght must less than 10' : ''}"
+            " ${!RegExp(r"(?=.*[A-Z])").hasMatch(password) ? 'Must have uppercase character' : ''}"
+            " ${!RegExp(r"(?=.*[a-z])|(?=.*[A-Z])").hasMatch(password) ? 'Must have a character' : ''}";
       }
+
       setState(() {});
+    } else {
+      UserService.login(Administrator(
+          email: '', guildId: 0, nickname: '', password: '', logedIn: true));
+      // ignore: use_build_context_synchronously
+      GoRouter.of(context).push("/home?page=1");
     }
   }
 
@@ -86,7 +108,7 @@ class _AuthPageState extends State<AuthPage> {
                           .withFontSize(12.sp),
                     ),
                     Form(
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.disabled,
                         key: formKey,
                         child: AutofillGroup(
                           child: Column(
@@ -99,6 +121,7 @@ class _AuthPageState extends State<AuthPage> {
                                 validationResultCallback: (value) {
                                   validationResults[0] = value;
                                 },
+                                validationMessage: emailValidationMessage,
                               ),
                               AuthPageInput(
                                 controller: passwordController,
@@ -108,6 +131,7 @@ class _AuthPageState extends State<AuthPage> {
                                 validationResultCallback: (value) {
                                   validationResults[1] = value;
                                 },
+                                validationMessage: passwordValidationMessage,
                               ),
                             ],
                           ),

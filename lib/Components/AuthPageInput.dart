@@ -1,4 +1,5 @@
 import 'package:discordbotadminui/Enums/ValidationTypes.dart';
+import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class AuthPageInput extends StatefulWidget {
   final ValidationTypes validationType;
   final String autofillHint;
   final Function validationResultCallback;
+  final String? validationMessage;
   const AuthPageInput({
     Key? key,
     required this.controller,
@@ -17,6 +19,7 @@ class AuthPageInput extends StatefulWidget {
     required this.validationType,
     required this.autofillHint,
     required this.validationResultCallback,
+    required this.validationMessage,
   }) : super(key: key);
 
   @override
@@ -51,11 +54,11 @@ class _AuthPageInputState extends State<AuthPageInput> {
                     ? false
                     : _obscureText,
                 controller: widget.controller,
-                validator: (text) {
+                onChanged: (text) {
                   if (widget.validationType == ValidationTypes.email) {
                     if (!RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(text!)) {
+                        .hasMatch(text)) {
                       setState(() {
                         valid = false;
                       });
@@ -68,14 +71,10 @@ class _AuthPageInputState extends State<AuthPageInput> {
                       ValidationTypes.password) {
                     if (!RegExp(
                             r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$")
-                        .hasMatch(text!)) {
+                        .hasMatch(text)) {
                       setState(() {
                         valid = false;
                       });
-                      return "${text.length < 8 ? 'lenght must be more than 8' : ''}"
-                          " ${text.length > 10 ? 'lenght must less than 10' : ''}"
-                          " ${!RegExp(r"(?=.*[A-Z])").hasMatch(text) ? 'Must have uppercase character' : ''}"
-                          " ${!RegExp(r"(?=.*[a-z])|(?=.*[A-Z])").hasMatch(text) ? 'Must have a character' : ''}";
                     } else {
                       setState(() {
                         valid = true;
@@ -87,6 +86,7 @@ class _AuthPageInputState extends State<AuthPageInput> {
                 },
                 decoration: InputDecoration(
                     labelText: widget.text,
+                    errorText: widget.validationMessage,
                     suffixIcon: Container(
                       padding: EdgeInsets.only(right: 1.w),
                       child: Row(
@@ -113,9 +113,9 @@ class _AuthPageInputState extends State<AuthPageInput> {
                         ],
                       ),
                     ),
-                    labelStyle: TextStyle(
-                        fontSize: 5.sp,
-                        color: const Color.fromARGB(150, 0, 0, 0)),
+                    labelStyle: TextStyleHelper.getTextStyleHelper(context)
+                        .defaultTextInputStyle
+                        .withFontSize(6.sp),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(

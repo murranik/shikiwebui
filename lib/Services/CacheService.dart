@@ -32,7 +32,7 @@ class CacheService {
     return data;
   }
 
-  Future removeUser() async {
+  static Future removeUser() async {
     await _sharedPrefs.setString("user", "");
   }
 }
