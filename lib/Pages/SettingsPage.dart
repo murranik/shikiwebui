@@ -58,6 +58,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           Switch(
                               value: themeNotifier.isDark,
+                              activeColor: ColorHelper.getColorHelper(context)
+                                  .activeColor,
                               onChanged: (value) async {
                                 if (themeNotifier.isDark) {
                                   themeNotifier.isDark = false;

@@ -47,7 +47,7 @@ class _ServerStatusColors {
   _ServerStatusColors(bool isDark) {
     if (isDark) {
       defaultShadowColor = Colors.grey.withOpacity(0.5);
-      defaultBackgroundColor = Colors.white60;
+      defaultBackgroundColor = Colors.black;
       onlineColor = Colors.green;
       offlineColor = const Color.fromARGB(255, 203, 42, 30);
     } else {
@@ -66,9 +66,10 @@ class ColorHelper {
       return _ColorHelperData(
         activeColor: Colors.green,
         cancelColor: const Color.fromARGB(255, 203, 42, 30),
+        defaultAppBackGroundColor: const Color(0xff00010D),
         dataTableCellColors: _DataTableCellColors(themeProvider.isDark),
         defaultNavMenuBackgroundColor: const Color(0xff333333),
-        defaultNavMenuTextColor: Colors.white,
+        defaultNavMenuTextColor: Colors.black,
         defaultTextColor: Colors.white,
         dropdownButtonColors: _DropdownButtonColors(themeProvider.isDark),
         serverStatusColors: _ServerStatusColors(themeProvider.isDark),
@@ -77,6 +78,7 @@ class ColorHelper {
       return _ColorHelperData(
         activeColor: Colors.green,
         cancelColor: const Color.fromARGB(255, 203, 42, 30),
+        defaultAppBackGroundColor: Colors.white,
         dataTableCellColors: _DataTableCellColors(themeProvider.isDark),
         defaultNavMenuBackgroundColor: const Color(0xff333333),
         defaultNavMenuTextColor: Colors.white,
@@ -95,6 +97,7 @@ class _ColorHelperData {
   late Color defaultTextColor;
   late Color defaultNavMenuTextColor;
   late Color defaultNavMenuBackgroundColor;
+  late Color defaultAppBackGroundColor;
   late Color activeColor;
   late Color cancelColor;
 
@@ -105,6 +108,7 @@ class _ColorHelperData {
     required this.defaultTextColor,
     required this.defaultNavMenuTextColor,
     required this.defaultNavMenuBackgroundColor,
+    required this.defaultAppBackGroundColor,
     required this.activeColor,
     required this.cancelColor,
   });

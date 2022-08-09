@@ -43,14 +43,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = GoRouter(
-      initialLocation: !UserService.getUser().logedIn ? '/' : '/home',
+      initialLocation: !UserService.getUser().logedIn ? '/' : '/home?page=1',
       errorBuilder: (context, state) {
         return const NotFoundPage();
       },
       routes: [
         GoRoute(
           path: '/home',
-          builder: (context, state) => const HomePage(),
+          builder: (context, state) {
+            final int page = int.parse(state.queryParams['page']!);
+            return HomePage(
+              page: page,
+            );
+          },
         ),
         GoRoute(
           path: '/',
@@ -124,19 +129,4 @@ ThemeData buildTheme(brightness) {
   return baseTheme.copyWith(
     textTheme: GoogleFonts.sairaTextTheme(baseTheme.textTheme),
   );
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-
-  void printSample() {}
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const HomePage();
-  }
 }

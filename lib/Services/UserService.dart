@@ -9,15 +9,21 @@ class UserService {
 
   static getUser() => _user;
 
-  static Future saveUser(Administrator administrator) async {
+  static Future login(Administrator administrator) async {
     await CacheService.saveUser(administrator);
     _user = administrator;
   }
 
   static loadUser() {
     var data = CacheService.loadUser();
-    if (data != null) {
+    if (data != null && data != "") {
       _user = Administrator.fromMap(json.decoder.convert(data));
     }
+  }
+
+  static Future logout() async {
+    await CacheService.removeUser();
+    _user = Administrator(
+        email: '', guildId: 0, nickname: '', password: '', logedIn: false);
   }
 }
