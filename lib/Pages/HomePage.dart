@@ -27,25 +27,22 @@ class _HomePageState extends State<HomePage> {
   var navButtonsList = [];
   GlobalKey stickyKey = GlobalKey();
   OverlayEntry? _overlayEntry;
-  final controller = ScrollController();
 
   Widget stickyBuilder(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
+    return Builder(
+      builder: (context) {
         final keyContext = stickyKey.currentContext;
         if (keyContext != null) {
           // widget is visible
           final box = keyContext.findRenderObject() as RenderBox;
           final pos = box.localToGlobal(Offset.zero);
           return Positioned(
-            top: pos.dy + box.size.height,
-            right: 1.w,
-            width: 10.w,
+            top: pos.dy + box.size.height + 1,
+            right: 0.9.w,
+            width: 15.w,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
                 color: ColorHelper.getColorHelper(context)
                     .dataTableCellColors
                     .defaultBoxShadowColor,

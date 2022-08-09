@@ -16,15 +16,18 @@ class DataTableTextFieldCell extends StatelessWidget
 
   @override
   String name;
-  final TextEditingController editController;
-  DataTableTextFieldCell(
-      {Key? key,
-      this.backgroundColor,
-      this.flex = 3,
-      required this.name,
-      required this.editController})
-      : super(key: key);
 
+  final TextEditingController editController;
+  final Function save;
+  DataTableTextFieldCell({
+    Key? key,
+    this.backgroundColor,
+    this.flex = 3,
+    required this.name,
+    required this.editController,
+    required this.save,
+  }) : super(key: key);
+  var enable = false;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -47,17 +50,53 @@ class DataTableTextFieldCell extends StatelessWidget
                     .defaultBorderColor,
                 width: 0.5.sp,
               ))),
-          child: Row(
-            children: [
-              Expanded(
-                  child: TextField(
-                controller: editController,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                style: TextStyleHelper.getTextStyleHelper(context)
-                    .defaultTextStyle
-                    .withFontSize(4.sp),
-              ))
-            ],
+          child: StatefulBuilder(
+            builder:
+                (BuildContext context, void Function(void Function()) update) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: TextField(
+                    enabled: enable,
+                    controller: editController,
+                    textAlignVertical: TextAlignVertical.center,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    decoration:
+                        const InputDecoration(disabledBorder: InputBorder.none),
+                    style: TextStyleHelper.getTextStyleHelper(context)
+                        .defaultTextStyle
+                        .withFontSize(4.sp),
+                  )),
+                  if (enable)
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(
+                        Icons.check,
+                        color: ColorHelper.getColorHelper(context).activeColor,
+                      ),
+                      onPressed: () async {
+                        enable = false;
+
+                        await save();
+                        update(() {});
+                      },
+                    )
+                  else
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: Icon(
+                        Icons.edit,
+                        color: ColorHelper.getColorHelper(context).editColor,
+                      ),
+                      onPressed: () {
+                        enable = true;
+                        update(() {});
+                      },
+                    )
+                ],
+              );
+            },
           )),
     );
   }

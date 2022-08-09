@@ -28,10 +28,6 @@ class _RolesPageState extends State<RolesPage> {
               children: [
                 DataTableCell(name: "DiscordId"),
                 DataTableCell(name: "Name"),
-                DataTableCell(
-                  name: "Tools",
-                  flex: 1,
-                ),
               ],
             ),
             FutureBuilder(
@@ -52,36 +48,16 @@ class _RolesPageState extends State<RolesPage> {
                               padding: EdgeInsets.zero,
                               children: [
                                 for (var discordRole in snapshot.data!)
-                                  Builder(
-                                    builder: (BuildContext context) {
-                                      var edit = false;
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          DataTableCell(
-                                            name: discordRole.name.toString(),
-                                          ),
-                                          DataTableCell(
-                                              name: discordRole.discordId
-                                                  .toString()),
-                                          StatefulBuilder(
-                                            builder:
-                                                (BuildContext context, update) {
-                                              return DataTableToolsCell(
-                                                name: "Management",
-                                                flex: 1,
-                                                edit: edit,
-                                                callBack: (value) {
-                                                  edit = value;
-                                                  update(() {});
-                                                },
-                                                save: () {},
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      DataTableCell(
+                                        name: discordRole.name.toString(),
+                                      ),
+                                      DataTableCell(
+                                          name:
+                                              discordRole.discordId.toString()),
+                                    ],
                                   )
                               ],
                             )

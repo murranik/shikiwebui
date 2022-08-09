@@ -12,14 +12,14 @@ class CacheService {
 
   static SharedPreferences getPrefs() => _sharedPrefs;
 
-  static setTheme(bool value) async {
+  static setTheme(String value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool("darkTheme", value);
+    sharedPreferences.setString("theme", value);
   }
 
   static getTheme() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool("darkTheme") ?? false;
+    return sharedPreferences.getString("theme") ?? "white";
   }
 
   static Future saveUser(Administrator administrator) async {

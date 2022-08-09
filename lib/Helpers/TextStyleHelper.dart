@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 class TextStyleHelper {
   static TextStyleHelperData getTextStyleHelper(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-    if (themeProvider.isDark) {
+    if (themeProvider.theme == "white") {
       return TextStyleHelperData(
         defaultTextStyle: TextStyle(
             fontSize: 6.sp,

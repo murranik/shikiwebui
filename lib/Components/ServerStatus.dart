@@ -75,7 +75,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                                 onEnd: () {
                                   setState(() {});
                                 },
-                                seconds: 20,
+                                seconds: 59,
                                 timePrefix: "Remaining to check connection:",
                                 textColor: ColorHelper.getColorHelper(context)
                                     .serverStatusColors
@@ -130,7 +130,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                                 onEnd: () {
                                   setState(() {});
                                 },
-                                seconds: 20,
+                                seconds: 59,
                                 timePrefix: "Remaining to reconnect:",
                                 textColor: ColorHelper.getColorHelper(context)
                                     .serverStatusColors
