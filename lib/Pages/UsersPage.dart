@@ -34,17 +34,10 @@ class _UsersPageState extends State<UsersPage> {
                   name: "Name",
                   flex: 20,
                 ),
-                Expanded(
-                    flex: 30,
-                    child: Row(
-                      children: [
-                        DataTableCell(
-                          name: "PrestigeLevel",
-                          flex: 20,
-                        ),
-                        DataTableCell(name: "Tools", flex: 10),
-                      ],
-                    ))
+                DataTableCell(
+                  name: "PrestigeLevel",
+                  flex: 20,
+                ),
               ],
             ),
             FutureBuilder(
@@ -87,46 +80,37 @@ class _UsersPageState extends State<UsersPage> {
                                             void Function(void Function())
                                                 update) {
                                           //Todo make widget with multiple editable textfield
+                                          var oldLevel =
+                                              discordUser.prestigeLevel;
                                           var editController =
-                                              TextEditingController();
+                                              TextEditingController(
+                                                  text: discordUser
+                                                      .prestigeLevel
+                                                      .toString());
                                           return Expanded(
-                                              flex: 30,
+                                              flex: 20,
                                               child: Row(
                                                 children: [
-                                                  if (edit)
-                                                    DataTableTextFieldCell(
-                                                      editController:
-                                                          editController,
-                                                      name: discordUser
-                                                          .prestigeLevel
-                                                          .toString(),
-                                                      flex: 20,
-                                                    )
-                                                  else
-                                                    DataTableCell(
-                                                      name: discordUser
-                                                          .prestigeLevel
-                                                          .toString(),
-                                                      flex: 20,
-                                                    ),
-                                                  DataTableToolsCell(
-                                                    name: "Management",
-                                                    flex: 10,
-                                                    edit: edit,
-                                                    callBack: (value) {
-                                                      edit = value;
-                                                      update(() {});
-                                                    },
+                                                  DataTableTextFieldCell(
+                                                    editController:
+                                                        editController,
+                                                    name: discordUser
+                                                        .prestigeLevel
+                                                        .toString(),
+                                                    flex: 20,
                                                     save: () {
-                                                      DiscordBotApiService
-                                                          .changeUserPrestigeLevel(
-                                                              discordUser
-                                                                  .discordId,
-                                                              int.parse(
-                                                                  editController
-                                                                      .text));
+                                                      if (oldLevel.toString() !=
+                                                          editController.text) {
+                                                        DiscordBotApiService
+                                                            .changeUserPrestigeLevel(
+                                                                discordUser
+                                                                    .discordId,
+                                                                int.parse(
+                                                                    editController
+                                                                        .text));
+                                                      }
                                                     },
-                                                  ),
+                                                  )
                                                 ],
                                               ));
                                         },

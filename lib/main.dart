@@ -99,8 +99,9 @@ class MyApp extends StatelessWidget {
             routerDelegate: router.routerDelegate,
             theme: ThemeData(
               primarySwatch: Colors.green,
-              brightness:
-                  themeNotifier.isDark ? Brightness.dark : Brightness.light,
+              brightness: themeNotifier.theme == "dark"
+                  ? Brightness.dark
+                  : Brightness.light,
               textTheme: buildTheme(Brightness.dark).textTheme,
               pageTransitionsTheme: PageTransitionsTheme(
                 builders: kIsWeb

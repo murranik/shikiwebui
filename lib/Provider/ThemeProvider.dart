@@ -2,22 +2,33 @@ import 'package:discordbotadminui/Services/CacheService.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  late bool _isDark;
-  bool get isDark => _isDark;
+  late String _theme;
+  String get theme => _theme;
+
+  final List<String> _themes = [
+    "white",
+    "dark",
+    "highcontrast",
+    "dynamic",
+    "add",
+    "all"
+  ];
+
+  List<String> get themes => _themes;
 
   ThemeProvider() {
-    _isDark = false;
+    _theme = "white";
     getPreferences();
   }
 
-  set isDark(bool value) {
-    _isDark = value;
+  set theme(String value) {
+    _theme = value;
     CacheService.setTheme(value);
     notifyListeners();
   }
 
   getPreferences() async {
-    _isDark = await CacheService.getTheme();
+    _theme = await CacheService.getTheme();
     notifyListeners();
   }
 }
