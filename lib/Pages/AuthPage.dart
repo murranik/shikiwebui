@@ -84,7 +84,7 @@ class _AuthPageState extends State<AuthPage> {
                 boxShadow: [
                   BoxShadow(
                     color: ColorHelper.getColorHelper(context)
-                        .serverStatusColors
+                        .floatingBoxColors
                         .defaultShadowColor,
                     spreadRadius: 5,
                     blurRadius: 7,
@@ -92,7 +92,7 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                 ],
                 color: ColorHelper.getColorHelper(context)
-                    .serverStatusColors
+                    .floatingBoxColors
                     .defaultBackgroundColor,
               ),
               child: Container(
@@ -103,7 +103,7 @@ class _AuthPageState extends State<AuthPage> {
                   children: [
                     Text(
                       "Login",
-                      style: TextStyleHelper.getTextStyleHelper(context)
+                      style: TextStyleHelper.get(context)
                           .defaultTextStyle
                           .withFontSize(12.sp),
                     ),
@@ -160,8 +160,7 @@ class _AuthPageState extends State<AuthPage> {
                                 child: Text(
                                   "Continue",
                                   textAlign: TextAlign.center,
-                                  style: TextStyleHelper.getTextStyleHelper(
-                                          context)
+                                  style: TextStyleHelper.get(context)
                                       .defaultTextStyle,
                                 )),
                           ),

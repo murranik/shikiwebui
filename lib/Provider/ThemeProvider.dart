@@ -1,34 +1,39 @@
+import 'dart:convert';
+
+import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Models/ColorHelperData.dart';
 import 'package:discordbotadminui/Services/CacheService.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  late String _theme;
-  String get theme => _theme;
-
-  final List<String> _themes = [
-    "white",
-    "dark",
-    "highcontrast",
-    "dynamic",
-    "add",
-    "all"
-  ];
-
-  List<String> get themes => _themes;
-
   ThemeProvider() {
-    _theme = "white";
+    _currentTheme = ColorHelper.getBasicColorHelper();
     getPreferences();
   }
 
-  set theme(String value) {
-    _theme = value;
-    CacheService.setTheme(value);
+  List<String> _themes = [];
+
+  List<String> get themes => _themes;
+
+  set themes(List<String> themes) {
+    _themes = themes;
     notifyListeners();
   }
 
-  getPreferences() async {
-    _theme = await CacheService.getTheme();
+  late ColorHelperData _currentTheme;
+
+  ColorHelperData get currentTheme => _currentTheme;
+
+  set currentTheme(ColorHelperData currentTheme) {
+    _currentTheme = currentTheme;
+    CacheService.setTheme(_currentTheme).then((value) => notifyListeners());
+  }
+
+  getPreferences() {
+    var data = CacheService.getTheme();
+    if (data != null) {
+      _currentTheme = ColorHelperData.fromMap(json.decoder.convert(data));
+    }
     notifyListeners();
   }
 }

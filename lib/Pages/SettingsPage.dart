@@ -1,6 +1,10 @@
+import 'package:discordbotadminui/Components/CreateThemeComponent.dart';
+import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
+import 'package:discordbotadminui/Models/ColorHelperData.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
+import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -20,8 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
       return Column(
         children: [
           Text("Ui settings",
-              style:
-                  TextStyleHelper.getTextStyleHelper(context).defaultTextStyle),
+              style: TextStyleHelper.get(context).defaultTextStyle),
           Expanded(
               child: SingleChildScrollView(
             child: Column(
@@ -32,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       boxShadow: [
                         BoxShadow(
                           color: ColorHelper.getColorHelper(context)
-                              .serverStatusColors
+                              .floatingBoxColors
                               .defaultShadowColor,
                           spreadRadius: 5,
                           blurRadius: 7,
@@ -41,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ],
                       color: ColorHelper.getColorHelper(context)
-                          .serverStatusColors
+                          .floatingBoxColors
                           .defaultBackgroundColor,
                     ),
                     width: 40.w,
@@ -50,104 +53,101 @@ class _SettingsPageState extends State<SettingsPage> {
                         Center(
                           child: Text(
                             "Themes",
-                            style: TextStyleHelper.getTextStyleHelper(context)
-                                .defaultTextStyle,
+                            style:
+                                TextStyleHelper.get(context).defaultTextStyle,
                           ),
                         ),
-                        GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 5,
-                            crossAxisSpacing: 5.0,
-                            mainAxisSpacing: 5.0,
-                          ),
-                          itemCount: themeNotifier.themes.length,
-                          padding: EdgeInsets.all(2.sp),
-                          itemBuilder: (context, index) {
-                            if (themeNotifier.themes[index] == "add") {
-                              return Container(
-                                decoration: BoxDecoration(
-                                    color: ColorHelper.getColorHelper(context)
-                                        .serverStatusColors
-                                        .defaultBackgroundColor,
-                                    borderRadius: BorderRadius.circular(25)),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 10.sp,
-                                ),
-                              );
-                            } else if (themeNotifier.themes[index] == "all") {
-                              return Container();
+                        FutureBuilder(
+                          future: ThemesApiService.getThemes(context),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<List<ColorHelperData>> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return CircularProgressIndicator(
+                                  color: ColorHelper.getColorHelper(context)
+                                      .activeColor);
                             } else {
-                              return GestureDetector(
-                                onTap: () {
-                                  themeNotifier.theme =
-                                      themeNotifier.themes[index];
-                                },
-                                child: themeNotifier.themes[index] == "dynamic"
-                                    ? Container(
-                                        decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .defaultAppBackGroundColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .cancelColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .activeColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .defaultNavMenuTextColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .editColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .serverStatusColors
-                                                .offlineColor,
-                                          ],
+                              if (snapshot.hasData) {
+                                return GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 5,
+                                    crossAxisSpacing: 5.0,
+                                    mainAxisSpacing: 5.0,
+                                  ),
+                                  itemCount: snapshot.data!.length,
+                                  padding: EdgeInsets.all(2.sp),
+                                  itemBuilder: (context, index) {
+                                    if (snapshot.data![index].name == "add") {
+                                      return InkWell(
+                                        onTap: () async {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return const CreateThemeComponent();
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: ColorHelper.getColorHelper(
+                                                      context)
+                                                  .floatingBoxColors
+                                                  .defaultBackgroundColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(25)),
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 10.sp,
+                                          ),
                                         ),
-                                      ))
-                                    : Container(
-                                        decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          stops: [.5, .5],
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .defaultAppBackGroundColor,
-                                            ColorHelper.getColorHelper(context,
-                                                    theme: themeNotifier
-                                                        .themes[index])
-                                                .activeColor, // top Right part
-                                          ],
-                                        ),
-                                      )),
-                              );
+                                      );
+                                    } else {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          themeNotifier.currentTheme =
+                                              snapshot.data![index];
+                                        },
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            stops: [.5, .5],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              snapshot.data![index]
+                                                  .defaultAppBackGroundColor,
+                                              snapshot.data![index]
+                                                  .activeColor, // top Right part
+                                            ],
+                                          ),
+                                        )),
+                                      );
+                                    }
+                                  },
+                                );
+                              } else {
+                                return Center(
+                                  child: Text(
+                                    'No data',
+                                    style: TextStyleHelper.get(context)
+                                        .defaultTextStyle
+                                        .withColor(
+                                            ColorHelper.getColorHelper(context)
+                                                .cancelColor),
+                                  ),
+                                );
+                              }
                             }
                           },
                         ),
                         Center(
                           child: Text(
                             "Languages",
-                            style: TextStyleHelper.getTextStyleHelper(context)
-                                .defaultTextStyle,
+                            style:
+                                TextStyleHelper.get(context).defaultTextStyle,
                           ),
                         ),
                       ],

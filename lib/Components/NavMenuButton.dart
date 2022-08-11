@@ -45,8 +45,7 @@ class NavMenuButton extends StatelessWidget {
                   onTap: () => onClick(),
                   child: Text(
                     text,
-                    style: TextStyleHelper.getTextStyleHelper(context)
-                        .defaultNavMenuTextStyle,
+                    style: TextStyleHelper.get(context).defaultNavMenuTextStyle,
                   ),
                 ),
               ]))),

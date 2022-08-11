@@ -64,7 +64,7 @@ class DataTableTextFieldCell extends StatelessWidget
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration:
                         const InputDecoration(disabledBorder: InputBorder.none),
-                    style: TextStyleHelper.getTextStyleHelper(context)
+                    style: TextStyleHelper.get(context)
                         .defaultTextStyle
                         .withFontSize(4.sp),
                   )),

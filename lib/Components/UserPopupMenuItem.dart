@@ -25,8 +25,7 @@ class UserPopupMenuItem extends StatelessWidget {
                     padding: EdgeInsets.only(left: 1.w),
                     child: Text(
                       text,
-                      style: TextStyleHelper.getTextStyleHelper(context)
-                          .defaultTextStyle,
+                      style: TextStyleHelper.get(context).defaultTextStyle,
                     ),
                   ),
                   Padding(

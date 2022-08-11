@@ -126,8 +126,8 @@ class _UsersPageState extends State<UsersPage> {
                       return Expanded(
                           child: Center(
                         child: Text("No data",
-                            style: TextStyleHelper.getTextStyleHelper(context)
-                                .defaultTextStyle),
+                            style:
+                                TextStyleHelper.get(context).defaultTextStyle),
                       ));
                     }
                   case ConnectionState.waiting:

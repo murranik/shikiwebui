@@ -69,8 +69,7 @@ class _RolesPageState extends State<RolesPage> {
                           child: Center(
                         child: Text(
                           "No data",
-                          style: TextStyleHelper.getTextStyleHelper(context)
-                              .defaultTextStyle,
+                          style: TextStyleHelper.get(context).defaultTextStyle,
                         ),
                       ));
                     }

@@ -16,17 +16,15 @@ class NotFoundPage extends StatelessWidget {
         Center(
             child: Text(
           "404\nPage not found",
-          style: TextStyleHelper.getTextStyleHelper(context)
-              .defaultTextStyle
-              .withFontSize(10.sp),
+          style:
+              TextStyleHelper.get(context).defaultTextStyle.withFontSize(10.sp),
           textAlign: TextAlign.center,
         )),
         TextButton(
             onPressed: () => (GoRouter.of(context).go("/")),
             child: Text(
               "home",
-              style:
-                  TextStyleHelper.getTextStyleHelper(context).defaultTextStyle,
+              style: TextStyleHelper.get(context).defaultTextStyle,
             ))
       ],
     ));

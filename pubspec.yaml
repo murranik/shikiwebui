@@ -17,6 +17,7 @@ dependencies:
   dropdown_button2: 1.6.3
   provider: 6.0.3
   go_router: 4.1.0
+  expandable: 5.0.1
   google_fonts: 3.0.1
   shared_preferences: ^2.0.15
   
