@@ -33,9 +33,8 @@ class GuildsDropDownButton extends StatelessWidget {
                               value: "No connected guild",
                               child: Text(
                                 "No connected guild",
-                                style:
-                                    TextStyleHelper.getTextStyleHelper(context)
-                                        .defaultTextInputStyle,
+                                style: TextStyleHelper.get(context)
+                                    .defaultTextInputStyle,
                               ),
                             )
                           ]
@@ -51,8 +50,7 @@ class GuildsDropDownButton extends StatelessWidget {
                     value: snapshot.data == null
                         ? "No connected guild"
                         : snapshot.data!.first.name,
-                    style: TextStyleHelper.getTextStyleHelper(context)
-                        .defaultTextInputStyle,
+                    style: TextStyleHelper.get(context).defaultTextInputStyle,
                     onChanged: (value) {
                       if (snapshot.data != null) {
                         guildIdCallback(snapshot.data!
@@ -101,8 +99,7 @@ class GuildsDropDownButton extends StatelessWidget {
                 {
                   return Center(
                     child: Text("No data",
-                        style: TextStyleHelper.getTextStyleHelper(context)
-                            .defaultTextStyle),
+                        style: TextStyleHelper.get(context).defaultTextStyle),
                   );
                 }
             }

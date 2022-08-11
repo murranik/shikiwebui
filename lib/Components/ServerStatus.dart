@@ -42,7 +42,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                             boxShadow: [
                               BoxShadow(
                                 color: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
+                                    .floatingBoxColors
                                     .defaultShadowColor,
                                 spreadRadius: 5,
                                 blurRadius: 7,
@@ -51,7 +51,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                               ),
                             ],
                             color: ColorHelper.getColorHelper(context)
-                                .serverStatusColors
+                                .floatingBoxColors
                                 .defaultBackgroundColor,
                           ),
                           child: Column(
@@ -61,26 +61,22 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                               Icon(
                                 Icons.check_circle,
                                 color: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
-                                    .onlineColor,
+                                    .activeColor,
                                 size: 9.sp,
                               ),
                               Text(
                                 snapshot.data!,
-                                style:
-                                    TextStyleHelper.getTextStyleHelper(context)
-                                        .defaultServerStatusTextStyle,
+                                style: TextStyleHelper.get(context)
+                                    .defaultServerStatusTextStyle,
                               ),
                               RefreshTimer(
-                                onEnd: () {
-                                  setState(() {});
-                                },
-                                seconds: 59,
-                                timePrefix: "Remaining to check connection:",
-                                textColor: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
-                                    .onlineColor,
-                              )
+                                  onEnd: () {
+                                    setState(() {});
+                                  },
+                                  seconds: 59,
+                                  timePrefix: "Remaining to check connection:",
+                                  textColor: ColorHelper.getColorHelper(context)
+                                      .activeColor)
                             ],
                           ));
                     } else {
@@ -93,7 +89,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                             boxShadow: [
                               BoxShadow(
                                 color: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
+                                    .floatingBoxColors
                                     .defaultShadowColor,
                                 spreadRadius: 5,
                                 blurRadius: 7,
@@ -102,7 +98,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                               ),
                             ],
                             color: ColorHelper.getColorHelper(context)
-                                .serverStatusColors
+                                .floatingBoxColors
                                 .defaultBackgroundColor,
                           ),
                           child: Column(
@@ -112,19 +108,16 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                               Icon(
                                 CupertinoIcons.clear_thick_circled,
                                 color: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
-                                    .offlineColor,
+                                    .cancelColor,
                                 size: 14.sp,
                               ),
                               Text(
                                 "Server offline",
-                                style:
-                                    TextStyleHelper.getTextStyleHelper(context)
-                                        .defaultServerStatusTextStyle
-                                        .withColor(
-                                            ColorHelper.getColorHelper(context)
-                                                .serverStatusColors
-                                                .offlineColor),
+                                style: TextStyleHelper.get(context)
+                                    .defaultServerStatusTextStyle
+                                    .withColor(
+                                        ColorHelper.getColorHelper(context)
+                                            .cancelColor),
                               ),
                               RefreshTimer(
                                 onEnd: () {
@@ -133,8 +126,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                                 seconds: 59,
                                 timePrefix: "Remaining to reconnect:",
                                 textColor: ColorHelper.getColorHelper(context)
-                                    .serverStatusColors
-                                    .offlineColor,
+                                    .cancelColor,
                               )
                             ],
                           ));
@@ -160,8 +152,7 @@ class _ServerStatusComponentState extends State<ServerStatusComponent> {
                   return Expanded(
                       child: Center(
                     child: Text("No data",
-                        style: TextStyleHelper.getTextStyleHelper(context)
-                            .defaultTextStyle),
+                        style: TextStyleHelper.get(context).defaultTextStyle),
                   ));
                 }
             }

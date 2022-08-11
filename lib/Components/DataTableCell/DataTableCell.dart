@@ -40,9 +40,8 @@ class DataTableCell extends StatelessWidget implements DataTableCellInterface {
             ))),
         child: Text(
           name,
-          style: TextStyleHelper.getTextStyleHelper(context)
-              .defaultTextStyle
-              .withFontSize(4.sp),
+          style:
+              TextStyleHelper.get(context).defaultTextStyle.withFontSize(4.sp),
         ),
       ),
     );

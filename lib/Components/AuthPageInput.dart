@@ -48,8 +48,7 @@ class _AuthPageInputState extends State<AuthPageInput> {
             Expanded(
               child: TextFormField(
                 autofillHints: [widget.autofillHint],
-                style: TextStyleHelper.getTextStyleHelper(context)
-                    .defaultTextInputStyle,
+                style: TextStyleHelper.get(context).defaultTextInputStyle,
                 obscureText: widget.validationType == ValidationTypes.email
                     ? false
                     : _obscureText,
@@ -113,7 +112,7 @@ class _AuthPageInputState extends State<AuthPageInput> {
                         ],
                       ),
                     ),
-                    labelStyle: TextStyleHelper.getTextStyleHelper(context)
+                    labelStyle: TextStyleHelper.get(context)
                         .defaultTextInputStyle
                         .withFontSize(6.sp),
                     enabledBorder: OutlineInputBorder(

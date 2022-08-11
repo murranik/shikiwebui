@@ -1,3 +1,4 @@
+import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Pages/AuthPage.dart';
 import 'package:discordbotadminui/Pages/ConfirmEmail.dart';
 import 'package:discordbotadminui/Pages/HomePage.dart';
@@ -7,6 +8,7 @@ import 'package:discordbotadminui/Pages/SystemMessagePage.dart';
 import 'package:discordbotadminui/Pages/UsersPage.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:discordbotadminui/Services/CacheService.dart';
+import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ import 'package:sizer/sizer.dart';
 
 void main() async {
   await CacheService.init();
+  await CacheService.setTheme(ColorHelper.getBasicColorHelper());
   UserService.loadUser();
   runApp(const MyApp());
 }
@@ -93,32 +96,31 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
           builder: (context, ThemeProvider themeNotifier, child) {
         return Sizer(
-          builder: (context, orientation, deviceType) => MaterialApp.router(
-            routeInformationParser: router.routeInformationParser,
-            routeInformationProvider: router.routeInformationProvider,
-            routerDelegate: router.routerDelegate,
-            theme: ThemeData(
-              primarySwatch: Colors.green,
-              brightness: themeNotifier.theme == "dark"
-                  ? Brightness.dark
-                  : Brightness.light,
-              textTheme: buildTheme(Brightness.dark).textTheme,
-              pageTransitionsTheme: PageTransitionsTheme(
-                builders: kIsWeb
-                    ? {
-                        // No animations for every OS if the app running on the web
-                        for (final platform in TargetPlatform.values)
-                          platform: const NoTransitionsBuilder(),
-                      }
-                    : const {
-                        // handel other platforms you are targeting
-                      },
-              ),
-            ),
-            debugShowCheckedModeBanner: false,
-            themeMode: ThemeMode.dark,
-          ),
-        );
+            builder: (context, orientation, deviceType) => MaterialApp.router(
+                  routeInformationParser: router.routeInformationParser,
+                  routeInformationProvider: router.routeInformationProvider,
+                  routerDelegate: router.routerDelegate,
+                  theme: ThemeData(
+                    primarySwatch: Colors.green,
+                    brightness: themeNotifier.currentTheme.name == "dark"
+                        ? Brightness.dark
+                        : Brightness.light,
+                    textTheme: buildTheme(Brightness.dark).textTheme,
+                    pageTransitionsTheme: PageTransitionsTheme(
+                      builders: kIsWeb
+                          ? {
+                              // No animations for every OS if the app running on the web
+                              for (final platform in TargetPlatform.values)
+                                platform: const NoTransitionsBuilder(),
+                            }
+                          : const {
+                              // handel other platforms you are targeting
+                            },
+                    ),
+                  ),
+                  debugShowCheckedModeBanner: false,
+                  themeMode: ThemeMode.dark,
+                ));
       }),
     );
   }

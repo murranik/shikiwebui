@@ -21,7 +21,7 @@ class ConfirmEmailPage extends StatelessWidget {
         Center(
           child: Text(
             "Email succsessfully confirmed",
-            style: TextStyleHelper.getTextStyleHelper(context)
+            style: TextStyleHelper.get(context)
                 .defaultTextStyle
                 .withFontSize(10.sp),
             textAlign: TextAlign.center,
