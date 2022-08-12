@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class ThemesApiService {
   static Future<List<ColorHelperData>> getThemes(BuildContext context) async {
-    var request = await get(Uri.parse('https://localhost:7163/api/Themes'));
+    var request = await get(Uri.parse('https://localhost:7632/api/Themes'));
 
     if (request.statusCode == 200) {
       final data = jsonDecode(request.body) as List;
@@ -26,10 +26,21 @@ class ThemesApiService {
 
   static Future<ColorHelperData?> getTheme(String name) async {
     var request =
-        await get(Uri.parse('https://localhost:7163/api/Themes/$name'));
+        await get(Uri.parse('https://localhost:7632/api/Themes/$name'));
 
     if (request.statusCode == 200) {
       return ColorHelperData.fromMap(jsonDecode(request.body));
+    }
+
+    return null;
+  }
+
+  static Future<String?> getServerStatus() async {
+    var request =
+        await get(Uri.parse('https://localhost:7632/api/Themes/light'));
+
+    if (request.statusCode == 200) {
+      return "Ok";
     }
 
     return null;

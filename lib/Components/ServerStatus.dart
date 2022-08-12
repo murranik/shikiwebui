@@ -1,17 +1,16 @@
-import 'dart:async';
-
 import 'package:discordbotadminui/Components/Timer.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class ServerStatusComponent extends StatefulWidget {
-  final String? serverLink;
-  const ServerStatusComponent({Key? key, this.serverLink}) : super(key: key);
+  final Function futureFunction;
+  const ServerStatusComponent({Key? key, required this.futureFunction})
+      : super(key: key);
 
   @override
   State<ServerStatusComponent> createState() => _ServerStatusComponentState();
@@ -20,145 +19,134 @@ class ServerStatusComponent extends StatefulWidget {
 class _ServerStatusComponentState extends State<ServerStatusComponent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        FutureBuilder(
-          future: DiscordBotApiService.getServerStatus(),
-          builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                {
-                  return StatefulBuilder(
-                      builder: (BuildContext context, update) {
-                    if (snapshot.data != null) {
-                      return Container(
-                          width: 60.w,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(3.sp),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorHelper.getColorHelper(context)
-                                    .floatingBoxColors
-                                    .defaultShadowColor,
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ],
+    return FutureBuilder(
+      future: widget.futureFunction(),
+      builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            {
+              return StatefulBuilder(builder: (BuildContext context, update) {
+                if (snapshot.data != null) {
+                  return Container(
+                      width: 60.w,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(3.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
                             color: ColorHelper.getColorHelper(context)
                                 .floatingBoxColors
-                                .defaultBackgroundColor,
+                                .defaultShadowColor,
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.check_circle,
-                                color: ColorHelper.getColorHelper(context)
-                                    .activeColor,
-                                size: 9.sp,
-                              ),
-                              Text(
-                                snapshot.data!,
-                                style: TextStyleHelper.get(context)
-                                    .defaultServerStatusTextStyle,
-                              ),
-                              RefreshTimer(
-                                  onEnd: () {
-                                    setState(() {});
-                                  },
-                                  seconds: 59,
-                                  timePrefix: "Remaining to check connection:",
-                                  textColor: ColorHelper.getColorHelper(context)
-                                      .activeColor)
-                            ],
-                          ));
-                    } else {
-                      return Container(
-                          width: 60.w,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 3.sp),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorHelper.getColorHelper(context)
-                                    .floatingBoxColors
-                                    .defaultShadowColor,
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ],
+                        ],
+                        color: ColorHelper.getColorHelper(context)
+                            .floatingBoxColors
+                            .defaultBackgroundColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color:
+                                ColorHelper.getColorHelper(context).activeColor,
+                            size: 9.sp,
+                          ),
+                          Text(
+                            snapshot.data!,
+                            style: TextStyleHelper.get(context)
+                                .defaultServerStatusTextStyle,
+                          ),
+                          RefreshTimer(
+                              onEnd: () {
+                                setState(() {});
+                              },
+                              seconds: 59,
+                              timePrefix: "Remaining to check connection:",
+                              textColor: ColorHelper.getColorHelper(context)
+                                  .activeColor)
+                        ],
+                      ));
+                } else {
+                  return Container(
+                      width: 60.w,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: 3.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
                             color: ColorHelper.getColorHelper(context)
                                 .floatingBoxColors
-                                .defaultBackgroundColor,
+                                .defaultShadowColor,
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                CupertinoIcons.clear_thick_circled,
-                                color: ColorHelper.getColorHelper(context)
-                                    .cancelColor,
-                                size: 14.sp,
-                              ),
-                              Text(
-                                "Server offline",
-                                style: TextStyleHelper.get(context)
-                                    .defaultServerStatusTextStyle
-                                    .withColor(
-                                        ColorHelper.getColorHelper(context)
-                                            .cancelColor),
-                              ),
-                              RefreshTimer(
-                                onEnd: () {
-                                  setState(() {});
-                                },
-                                seconds: 59,
-                                timePrefix: "Remaining to reconnect:",
-                                textColor: ColorHelper.getColorHelper(context)
-                                    .cancelColor,
-                              )
-                            ],
-                          ));
-                    }
-                  });
+                        ],
+                        color: ColorHelper.getColorHelper(context)
+                            .floatingBoxColors
+                            .defaultBackgroundColor,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            CupertinoIcons.clear_thick_circled,
+                            color:
+                                ColorHelper.getColorHelper(context).cancelColor,
+                            size: 14.sp,
+                          ),
+                          Text(
+                            "Server offline",
+                            style: TextStyleHelper.get(context)
+                                .defaultServerStatusTextStyle
+                                .withColor(ColorHelper.getColorHelper(context)
+                                    .cancelColor),
+                          ),
+                          RefreshTimer(
+                            onEnd: () {
+                              setState(() {});
+                            },
+                            seconds: 59,
+                            timePrefix: "Remaining to reconnect:",
+                            textColor:
+                                ColorHelper.getColorHelper(context).cancelColor,
+                          )
+                        ],
+                      ));
                 }
-              case ConnectionState.waiting:
-                {
-                  return Expanded(
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: SizedBox(
-                            width: 20.sp,
-                            height: 20.sp,
-                            child: CircularProgressIndicator(
-                              color: ColorHelper.getColorHelper(context)
-                                  .activeColor,
-                            ),
-                          )));
-                }
-              default:
-                {
-                  return Expanded(
-                      child: Center(
-                    child: Text("No data",
-                        style: TextStyleHelper.get(context).defaultTextStyle),
-                  ));
-                }
+              });
             }
-          },
-        )
-      ],
+          case ConnectionState.waiting:
+            {
+              return Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 20.sp,
+                    height: 20.sp,
+                    child: CircularProgressIndicator(
+                      color: ColorHelper.getColorHelper(context).activeColor,
+                    ),
+                  ));
+            }
+          default:
+            {
+              return Center(
+                child: Text("No data",
+                    style: TextStyleHelper.get(context).defaultTextStyle),
+              );
+            }
+        }
+      },
     );
   }
 }
