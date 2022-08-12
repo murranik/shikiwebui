@@ -7,6 +7,8 @@ import 'package:discordbotadminui/Pages/RolesPage.dart';
 import 'package:discordbotadminui/Pages/SettingsPage.dart';
 import 'package:discordbotadminui/Pages/UsersPage.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
+import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
+import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/material.dart';
 import 'package:discordbotadminui/Components/NavMenuButton.dart';
@@ -183,7 +185,23 @@ class _HomePageState extends State<HomePage> {
                     } else if (navButtonsList[2] != null) {
                       return const RolesPage();
                     } else if (navButtonsList[0] != null) {
-                      return const ServerStatusComponent();
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 2.h),
+                            const ServerStatusComponent(
+                                futureFunction:
+                                    DiscordBotApiService.getServerStatus),
+                            SizedBox(height: 2.h),
+                            const ServerStatusComponent(
+                                futureFunction:
+                                    ThemesApiService.getServerStatus),
+                            SizedBox(height: 2.h),
+                          ],
+                        ),
+                      );
                     } else if (navButtonsList[3] != null) {
                       return const SettingsPage();
                     } else {

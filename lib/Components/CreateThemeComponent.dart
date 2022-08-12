@@ -1,11 +1,12 @@
 import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableCategoryItem.dart';
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableItem.dart';
 import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableListView.dart';
-import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart' as m;
 import 'package:sizer/sizer.dart';
 
 class CreateThemeComponent extends StatefulWidget {
@@ -21,6 +22,19 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
   var dropdownExpandController = ExpandableController();
   var tableCellExpandController = ExpandableController();
   String? pickedColor = null;
+  var r = 0.0;
+  var g = 0.0;
+  var b = 0.0;
+  var alpha = 0.0;
+
+  Color pickerColor = Color(0xff443a49);
+  Color currentColor = Color(0xff443a49);
+
+  var textController = TextEditingController();
+// ValueChanged<Color> callback
+  void changeColor(Color color) {
+    setState(() => pickerColor = color);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +69,10 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             expandController: basicColorsExpandController,
                             pickedTextCallBack: (pickedColorText) {
                               pickedColor = pickedColorText;
+                              r = 0.0;
+                              g = 0.0;
+                              b = 0.0;
+                              setState(() {});
                             },
                             expandablesItemsData: const [
                               "Active color",
@@ -76,6 +94,10 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             expandController: floatingBoxExpandController,
                             pickedTextCallBack: (pickedColorText) {
                               pickedColor = pickedColorText;
+                              r = 0.0;
+                              g = 0.0;
+                              b = 0.0;
+                              setState(() {});
                             },
                             expandablesItemsData: const [
                               "Shadow color",
@@ -92,6 +114,10 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             expandController: dropdownExpandController,
                             pickedTextCallBack: (pickedColorText) {
                               pickedColor = pickedColorText;
+                              r = 0.0;
+                              g = 0.0;
+                              b = 0.0;
+                              setState(() {});
                             },
                             expandablesItemsData: const [
                               "Barrier color",
@@ -109,6 +135,10 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             expandController: tableCellExpandController,
                             pickedTextCallBack: (pickedColorText) {
                               pickedColor = pickedColorText;
+                              r = 0.0;
+                              g = 0.0;
+                              b = 0.0;
+                              setState(() {});
                             },
                             expandablesItemsData: const [
                               "Box shadow color",
@@ -124,21 +154,73 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                   width: 2,
                 ),
                 Expanded(
-                    flex: 5,
-                    child: pickedColor != null
-                        ? Container()
-                        : Column(
-                            children: [
+                  flex: 5,
+                  child: pickedColor != null
+                      ? StatefulBuilder(
+                          builder: (BuildContext context,
+                              void Function(void Function()) update) {
+                            return Column(children: [
+                              Text(
+                                pickedColor!,
+                                style: TextStyleHelper.get(context)
+                                    .defaultTextStyle,
+                              ),
                               Expanded(
-                                child: Image.network(
-                                  "https://images-na.ssl-images-amazon.com/images/I/81MPrEl0F1L.png",
-                                  fit: BoxFit.fill,
-                                  alignment: Alignment.center,
-                                  isAntiAlias: true,
-                                ),
-                              )
-                            ],
-                          )),
+                                  child: Column(
+                                children: [
+                                  m.ColorPicker(
+                                    pickerColor: pickerColor,
+                                    onColorChanged: changeColor,
+                                    colorPickerWidth: 300,
+                                    pickerAreaHeightPercent: 0.7,
+                                    enableAlpha: true,
+                                    displayThumbColor: true,
+                                    paletteType: m.PaletteType.hsvWithHue,
+                                    labelTypes: const [],
+                                    pickerAreaBorderRadius:
+                                        const BorderRadius.only(
+                                      topLeft: Radius.circular(2),
+                                      topRight: Radius.circular(2),
+                                    ),
+                                    hexInputController: textController,
+                                    portraitOnly: true,
+                                  ),
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          16, 0, 16, 16),
+                                      child: CupertinoTextField(
+                                          controller: textController,
+                                          prefix: const Padding(
+                                              padding: EdgeInsets.only(left: 8),
+                                              child: Icon(Icons.tag)),
+                                          suffix: IconButton(
+                                            icon: const Icon(
+                                                Icons.content_paste_rounded),
+                                            onPressed: () {},
+                                          ),
+                                          autofocus: true,
+                                          maxLength: 9,
+                                          inputFormatters: [
+                                            m.UpperCaseTextFormatter(),
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(m.kValidHexPattern)),
+                                          ]))
+                                ],
+                              ))
+                            ]);
+                          },
+                        )
+                      : Column(
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                "https://images-na.ssl-images-amazon.com/images/I/81MPrEl0F1L.png",
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          ],
+                        ),
+                ),
                 const VerticalDivider(
                   color: Colors.black,
                   thickness: 2,
