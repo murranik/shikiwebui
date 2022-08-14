@@ -1,18 +1,16 @@
-import 'package:discordbotadminui/Components/ServerStatus.dart';
+import 'package:discordbotadminui/Components/ServerStatus/ExpandableServerStatus.dart';
 import 'package:discordbotadminui/Components/UserPopupMenuItem.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
+import 'package:discordbotadminui/Managers/OverlaysManager.dart';
 import 'package:discordbotadminui/Pages/NotFoundPage.dart';
 import 'package:discordbotadminui/Pages/RolesPage.dart';
 import 'package:discordbotadminui/Pages/SettingsPage.dart';
 import 'package:discordbotadminui/Pages/UsersPage.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
-import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
-import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/material.dart';
 import 'package:discordbotadminui/Components/NavMenuButton.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -27,50 +25,54 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var navButtonsList = [];
-  GlobalKey stickyKey = GlobalKey();
-  OverlayEntry? _overlayEntry;
-
-  Widget stickyBuilder(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        final keyContext = stickyKey.currentContext;
-        if (keyContext != null) {
-          // widget is visible
-          final box = keyContext.findRenderObject() as RenderBox;
-          final pos = box.localToGlobal(Offset.zero);
-          return Positioned(
-            top: pos.dy + box.size.height + 1,
-            right: 0.9.w,
-            width: 15.w,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: ColorHelper.getColorHelper(context)
-                    .dataTableCellColors
-                    .defaultBoxShadowColor,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  UserPopupMenuItem(
-                    onTap: () {},
-                    text: "Edit",
-                  ),
-                  UserPopupMenuItem(
-                    onTap: () async {
-                      await UserService.logout();
-                      GoRouter.of(context).go("/");
-                    },
-                    text: "Logout",
-                  ),
-                ],
-              ),
+  var stickyKey = GlobalKey();
+  var appKey = GlobalKey();
+  var serverStatusOverlayIdentifier = "server status";
+  var overlayIdentifier = "userPopup";
+  void buildOverlay(BuildContext context) {
+    OverlaysManager.buildOverlay(context, stickyKey,
+        identifier: overlayIdentifier,
+        useKey: true,
+        right: 0.9.w,
+        widht: 15.w,
+        children: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            UserPopupMenuItem(
+              onTap: () {},
+              text: "Edit",
             ),
-          );
-        }
-        return Container();
-      },
-    );
+            UserPopupMenuItem(
+              onTap: () async {
+                await UserService.logout();
+                for (var everlay in OverlaysManager.overlays) {
+                  everlay.overlayEntry!.remove();
+                }
+                OverlaysManager.overlays.clear();
+                GoRouter.of(context).go("/");
+              },
+              text: "Logout",
+            )
+          ],
+        ));
+  }
+
+  void buildServerStatusOverlay(BuildContext context) {
+    OverlaysManager.buildOverlay(context, appKey,
+        identifier: serverStatusOverlayIdentifier,
+        useKey: false,
+        right: 0.5.w,
+        bottom: 0,
+        widht: 15.w,
+        children: ExpandableServerStatus(debugColor: Colors.transparent));
+  }
+
+  @override
+  void initState() {
+    buildOverlay(context);
+    buildServerStatusOverlay(context);
+    OverlaysManager.showOverlay(serverStatusOverlayIdentifier, context);
+    super.initState();
   }
 
   @override
@@ -81,6 +83,7 @@ class _HomePageState extends State<HomePage> {
     return Consumer<ThemeProvider>(
         builder: (context, ThemeProvider themeNotifier, child) {
       return Material(
+        key: appKey,
         color: ColorHelper.getColorHelper(context).defaultAppBackGroundColor,
         child: Column(children: [
           Expanded(
@@ -140,17 +143,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Listener(
                       onPointerDown: (event) {
-                        if (_overlayEntry != null) {
-                          _overlayEntry!.remove();
-                          _overlayEntry = null;
-                        } else {
-                          _overlayEntry = OverlayEntry(
-                            builder: (context) => stickyBuilder(context),
-                          );
-
-                          SchedulerBinding.instance.addPostFrameCallback((_) {
-                            Overlay.of(context)!.insert(_overlayEntry!);
-                          });
+                        if (UserService.getUser().logedIn) {
+                          OverlaysManager.showOverlay(
+                              overlayIdentifier, context);
                         }
                       },
                       child: Material(
@@ -185,10 +180,11 @@ class _HomePageState extends State<HomePage> {
                     } else if (navButtonsList[2] != null) {
                       return const RolesPage();
                     } else if (navButtonsList[0] != null) {
-                      return SingleChildScrollView(
+                      return Container();
+                      /*return SingleChildScrollView(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             SizedBox(height: 2.h),
                             const ServerStatusComponent(
@@ -201,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(height: 2.h),
                           ],
                         ),
-                      );
+                      );*/
                     } else if (navButtonsList[3] != null) {
                       return const SettingsPage();
                     } else {
@@ -217,7 +213,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    _overlayEntry!.remove();
+    //_overlayEntry!.remove();
     super.dispose();
   }
 }

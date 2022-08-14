@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:discordbotadminui/Models/ColorHelperData.dart';
-import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
 
 class ThemesApiService {
   static Future<List<ColorHelperData>> getThemes(BuildContext context) async {
-    var request = await get(Uri.parse('https://localhost:7632/api/Themes'));
+    var request = await get(Uri.parse('http://localhost:7632/api/Themes'));
 
     if (request.statusCode == 200) {
       final data = jsonDecode(request.body) as List;
@@ -26,7 +24,7 @@ class ThemesApiService {
 
   static Future<ColorHelperData?> getTheme(String name) async {
     var request =
-        await get(Uri.parse('https://localhost:7632/api/Themes/$name'));
+        await get(Uri.parse('http://localhost:7632/api/Themes/$name'));
 
     if (request.statusCode == 200) {
       return ColorHelperData.fromMap(jsonDecode(request.body));
@@ -37,10 +35,10 @@ class ThemesApiService {
 
   static Future<String?> getServerStatus() async {
     var request =
-        await get(Uri.parse('https://localhost:7632/api/Themes/light'));
+        await get(Uri.parse('http://localhost:7632/api/Themes?count=0'));
 
     if (request.statusCode == 200) {
-      return "Ok";
+      return "Server online";
     }
 
     return null;

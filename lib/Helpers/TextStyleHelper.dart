@@ -13,7 +13,7 @@ class TextStyleHelper {
             fontSize: 4.sp,
             color: ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
         defaultServerStatusTextStyle: TextStyle(
-            fontSize: 9.sp,
+            fontSize: 4.sp,
             color: ColorHelper.getColorHelper(context).activeColor),
         defaultTextInputStyle: GoogleFonts.lato(
           textStyle: TextStyle(
