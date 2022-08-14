@@ -54,7 +54,7 @@ class _RefreshTimerState extends State<RefreshTimer> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "${widget.timePrefix} ${intToTimeLeft(_countDownValue)}",
+      "${widget.timePrefix ?? ""} ${intToTimeLeft(_countDownValue)}",
       style: TextStyleHelper.get(context)
           .defaultServerStatusTextStyle
           .withColor(widget.textColor),

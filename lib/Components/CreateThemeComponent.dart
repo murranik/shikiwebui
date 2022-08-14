@@ -21,14 +21,9 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
   var floatingBoxExpandController = ExpandableController();
   var dropdownExpandController = ExpandableController();
   var tableCellExpandController = ExpandableController();
-  String? pickedColor = null;
-  var r = 0.0;
-  var g = 0.0;
-  var b = 0.0;
-  var alpha = 0.0;
+  String? choosedColor = null;
 
   Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xff443a49);
 
   var textController = TextEditingController();
 // ValueChanged<Color> callback
@@ -67,11 +62,8 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                         ),
                         ExpandableListView(
                             expandController: basicColorsExpandController,
-                            pickedTextCallBack: (pickedColorText) {
-                              pickedColor = pickedColorText;
-                              r = 0.0;
-                              g = 0.0;
-                              b = 0.0;
+                            pickedTextCallBack: (choosedColorText) {
+                              choosedColor = choosedColorText;
                               setState(() {});
                             },
                             expandablesItemsData: const [
@@ -92,11 +84,8 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                         ),
                         ExpandableListView(
                             expandController: floatingBoxExpandController,
-                            pickedTextCallBack: (pickedColorText) {
-                              pickedColor = pickedColorText;
-                              r = 0.0;
-                              g = 0.0;
-                              b = 0.0;
+                            pickedTextCallBack: (choosedColorText) {
+                              choosedColor = choosedColorText;
                               setState(() {});
                             },
                             expandablesItemsData: const [
@@ -112,11 +101,8 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                         ),
                         ExpandableListView(
                             expandController: dropdownExpandController,
-                            pickedTextCallBack: (pickedColorText) {
-                              pickedColor = pickedColorText;
-                              r = 0.0;
-                              g = 0.0;
-                              b = 0.0;
+                            pickedTextCallBack: (choosedColorText) {
+                              choosedColor = choosedColorText;
                               setState(() {});
                             },
                             expandablesItemsData: const [
@@ -133,11 +119,8 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                         ),
                         ExpandableListView(
                             expandController: tableCellExpandController,
-                            pickedTextCallBack: (pickedColorText) {
-                              pickedColor = pickedColorText;
-                              r = 0.0;
-                              g = 0.0;
-                              b = 0.0;
+                            pickedTextCallBack: (choosedColorText) {
+                              choosedColor = choosedColorText;
                               setState(() {});
                             },
                             expandablesItemsData: const [
@@ -155,13 +138,13 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                 ),
                 Expanded(
                   flex: 5,
-                  child: pickedColor != null
+                  child: choosedColor != null
                       ? StatefulBuilder(
                           builder: (BuildContext context,
                               void Function(void Function()) update) {
                             return Column(children: [
                               Text(
-                                pickedColor!,
+                                choosedColor!,
                                 style: TextStyleHelper.get(context)
                                     .defaultTextStyle,
                               ),
@@ -228,7 +211,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                 ),
                 Expanded(
                   flex: 10,
-                  child: pickedColor != null
+                  child: choosedColor != null
                       ? Container()
                       : Column(
                           children: [
