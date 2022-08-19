@@ -19,7 +19,7 @@ class ExpandableListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kDebugMode ? debugColor : Colors.transparent,
+      color: Colors.transparent,
       child: ExpandableNotifier(
         controller: expandController,
         child: Expandable(

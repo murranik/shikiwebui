@@ -19,6 +19,7 @@ class DataTableTextFieldCell extends StatelessWidget
 
   final TextEditingController editController;
   final Function save;
+
   DataTableTextFieldCell({
     Key? key,
     this.backgroundColor,
@@ -27,7 +28,9 @@ class DataTableTextFieldCell extends StatelessWidget
     required this.editController,
     required this.save,
   }) : super(key: key);
+
   var enable = false;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -65,7 +68,7 @@ class DataTableTextFieldCell extends StatelessWidget
                     decoration:
                         const InputDecoration(disabledBorder: InputBorder.none),
                     style: TextStyleHelper.get(context)
-                        .defaultTextStyle
+                        .defaultDataTableInputTextStyle
                         .withFontSize(4.sp),
                   )),
                   if (enable)

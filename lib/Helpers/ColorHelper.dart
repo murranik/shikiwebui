@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class ColorHelper {
   static ColorHelperData getColorHelper(BuildContext context) {
-    var themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
     return themeProvider.currentTheme;
   }
@@ -27,7 +27,6 @@ class ColorHelper {
         defaultBoxShadowColor: const Color.fromARGB(255, 218, 217, 217),
         defaultBorderColor: const Color.fromARGB(255, 200, 200, 200),
         defaultInputTextColor: Colors.black,
-        defaultEditColor: const Color.fromARGB(141, 9, 231, 9),
       ),
       dropdownButtonColors: DropdownButtonColors(
         id: -1,
@@ -43,5 +42,110 @@ class ColorHelper {
         defaultBackgroundColor: Colors.white60,
       ),
     );
+  }
+
+  static ColorHelperData getThemeCopy(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
+    final tempTheme = themeProvider.currentTheme;
+    return ColorHelperData(
+      name: tempTheme.name,
+      dataTableCellColors: DataTableCellColors(
+        defaultBorderColor: tempTheme.dataTableCellColors.defaultBorderColor,
+        defaultBoxShadowColor:
+            tempTheme.dataTableCellColors.defaultBoxShadowColor,
+        defaultInputTextColor:
+            tempTheme.dataTableCellColors.defaultInputTextColor,
+        id: tempTheme.dataTableCellColors.id,
+        parentName: tempTheme.dataTableCellColors.parentName,
+      ),
+      dropdownButtonColors: DropdownButtonColors(
+        defaultBarrierColor: tempTheme.dropdownButtonColors.defaultBarrierColor,
+        defaultIconDisabledColor:
+            tempTheme.dropdownButtonColors.defaultIconDisabledColor,
+        defaultIconEnableColor:
+            tempTheme.dropdownButtonColors.defaultIconEnableColor,
+        id: tempTheme.dropdownButtonColors.id,
+        parentName: tempTheme.dropdownButtonColors.parentName,
+      ),
+      floatingBoxColors: FloatingBoxColors(
+        defaultBackgroundColor:
+            tempTheme.floatingBoxColors.defaultBackgroundColor,
+        defaultShadowColor: tempTheme.floatingBoxColors.defaultShadowColor,
+        id: tempTheme.floatingBoxColors.id,
+        parentName: tempTheme.floatingBoxColors.parentName,
+      ),
+      activeColor: tempTheme.activeColor,
+      cancelColor: tempTheme.cancelColor,
+      defaultAppBackGroundColor: tempTheme.defaultAppBackGroundColor,
+      defaultNavMenuBackgroundColor: tempTheme.defaultNavMenuBackgroundColor,
+      defaultNavMenuTextColor: tempTheme.defaultNavMenuTextColor,
+      defaultTextColor: tempTheme.defaultTextColor,
+      description: tempTheme.description,
+      editColor: tempTheme.editColor,
+    );
+  }
+
+  static Color getColorByName(String choosedColor, BuildContext context,
+      {ColorHelperData? theme}) {
+    ColorHelperData? currentTheme;
+    if (theme != null) {
+      currentTheme = theme;
+    } else {
+      currentTheme =
+          Provider.of<ThemeProvider>(context, listen: false).currentTheme;
+    }
+    var color = Colors.transparent;
+    switch (choosedColor) {
+      case "Active color":
+        color = currentTheme.activeColor;
+        break;
+      case "Cancel/error color":
+        color = currentTheme.cancelColor;
+        break;
+      case "Edit color":
+        color = currentTheme.editColor;
+        break;
+      case "Text color":
+        color = currentTheme.defaultTextColor;
+        break;
+      case "Nav menu text color":
+        color = currentTheme.defaultNavMenuTextColor;
+        break;
+      case "Nav menu background color":
+        color = currentTheme.defaultNavMenuBackgroundColor;
+        break;
+      case "Background color":
+        color = currentTheme.defaultAppBackGroundColor;
+        break;
+      case "Shadow color":
+        color = currentTheme.floatingBoxColors.defaultShadowColor;
+        break;
+      case "Floating background color":
+        color = currentTheme.floatingBoxColors.defaultBackgroundColor;
+        break;
+      case "Barrier color":
+        color = currentTheme.dropdownButtonColors.defaultBarrierColor;
+        break;
+      case "IconEnable color":
+        color = currentTheme.dropdownButtonColors.defaultIconEnableColor;
+        break;
+      case "IconDisabled color":
+        color = currentTheme.dropdownButtonColors.defaultIconDisabledColor;
+        break;
+      case "Box shadow color":
+        color = currentTheme.dataTableCellColors.defaultBoxShadowColor;
+        break;
+      case "Border color":
+        color = currentTheme.dataTableCellColors.defaultBorderColor;
+        break;
+      case "Input text color":
+        color = currentTheme.dataTableCellColors.defaultInputTextColor;
+        break;
+      default:
+        color = Colors.transparent;
+    }
+
+    return color;
   }
 }

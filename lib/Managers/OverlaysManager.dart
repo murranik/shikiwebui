@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 
 class OverlaysManager {
   static List<OverlayManagerData> overlays = [];
+
   static buildOverlay(BuildContext context, GlobalKey overlayTargetKey,
       {double? right,
       double? widht,
@@ -23,7 +24,6 @@ class OverlaysManager {
                     builder: (context) {
                       final keyContext = overlayTargetKey.currentContext;
                       if (keyContext != null) {
-                        // widget is visible
                         final box = keyContext.findRenderObject() as RenderBox;
                         final pos = box.localToGlobal(Offset.zero);
                         return Positioned(

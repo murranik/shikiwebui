@@ -49,9 +49,9 @@ class _AuthPageInputState extends State<AuthPageInput> {
               child: TextFormField(
                 autofillHints: [widget.autofillHint],
                 style: TextStyleHelper.get(context).defaultTextInputStyle,
-                obscureText: widget.validationType == ValidationTypes.email
-                    ? false
-                    : _obscureText,
+                obscureText: widget.validationType == ValidationTypes.password
+                    ? _obscureText
+                    : false,
                 controller: widget.controller,
                 onChanged: (text) {
                   if (widget.validationType == ValidationTypes.email) {

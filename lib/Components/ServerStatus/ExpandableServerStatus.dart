@@ -62,7 +62,7 @@ class _ExpandableServerStatusState extends State<ExpandableServerStatus> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Server statuses",
+                  Text("Servers status",
                       style: TextStyleHelper.get(context)
                           .createThemeComponentStyles
                           .defaultExpandableListCategoryTextStyle,
