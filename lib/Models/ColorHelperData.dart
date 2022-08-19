@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 
 class DataTableCellColors {
-  int id;
+  int? id;
   String parentName;
   Color defaultBoxShadowColor;
   Color defaultBorderColor;
   Color defaultInputTextColor;
-  Color defaultEditColor;
 
   DataTableCellColors(
       {this.id = -1,
       this.parentName = '',
       this.defaultBoxShadowColor = Colors.white,
       this.defaultBorderColor = Colors.white,
-      this.defaultInputTextColor = Colors.white,
-      this.defaultEditColor = Colors.white});
+      this.defaultInputTextColor = Colors.white});
 
   factory DataTableCellColors.fromMap(Map<String, dynamic> json) =>
       DataTableCellColors(
-          id: json['id'],
-          parentName: json['parentName'],
-          defaultBoxShadowColor:
-              Color(int.parse(json['defaultBoxShadowColor'])),
-          defaultBorderColor: Color(int.parse(json['defaultBorderColor'])),
-          defaultInputTextColor:
-              Color(int.parse(json['defaultInputTextColor'])),
-          defaultEditColor: Color(int.parse(json['defaultEditColor'])));
+        id: json['id'],
+        parentName: json['parentName'],
+        defaultBoxShadowColor: Color(int.parse(json['defaultBoxShadowColor'])),
+        defaultBorderColor: Color(int.parse(json['defaultBorderColor'])),
+        defaultInputTextColor: Color(int.parse(json['defaultInputTextColor'])),
+      );
 
   Map<String, dynamic> toMap() {
     return {
@@ -36,13 +32,12 @@ class DataTableCellColors {
       'defaultBorderColor': '0x${defaultBorderColor.value.toRadixString(16)}',
       'defaultInputTextColor':
           '0x${defaultInputTextColor.value.toRadixString(16)}',
-      'defaultEditColor': '0x${defaultEditColor.value.toRadixString(16)}',
     };
   }
 }
 
 class DropdownButtonColors {
-  int id;
+  int? id;
   String parentName;
   Color defaultBarrierColor;
   Color defaultIconEnableColor;
@@ -80,7 +75,7 @@ class DropdownButtonColors {
 }
 
 class FloatingBoxColors {
-  int id;
+  int? id;
   String parentName;
   Color defaultShadowColor;
   Color defaultBackgroundColor;

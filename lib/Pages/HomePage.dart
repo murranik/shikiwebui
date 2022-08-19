@@ -96,8 +96,15 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
+                      child: IntrinsicHeight(
                     child: Row(
                       children: [
+                        VerticalDivider(
+                          color: ColorHelper.getColorHelper(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
+                        ),
                         NavMenuButton(
                           text: "Home",
                           onClick: () {
@@ -107,6 +114,12 @@ class _HomePageState extends State<HomePage> {
                           },
                           choosedColor: navButtonsList[0],
                           locked: !UserService.getUser().logedIn,
+                        ),
+                        VerticalDivider(
+                          color: ColorHelper.getColorHelper(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
                         ),
                         NavMenuButton(
                           text: "Users",
@@ -118,6 +131,12 @@ class _HomePageState extends State<HomePage> {
                           choosedColor: navButtonsList[1],
                           locked: !UserService.getUser().logedIn,
                         ),
+                        VerticalDivider(
+                          color: ColorHelper.getColorHelper(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
+                        ),
                         NavMenuButton(
                           text: "Roles",
                           onClick: () {
@@ -127,6 +146,12 @@ class _HomePageState extends State<HomePage> {
                           },
                           choosedColor: navButtonsList[2],
                           locked: !UserService.getUser().logedIn,
+                        ),
+                        VerticalDivider(
+                          color: ColorHelper.getColorHelper(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
                         ),
                         NavMenuButton(
                           text: "Settings",
@@ -138,9 +163,15 @@ class _HomePageState extends State<HomePage> {
                           choosedColor: navButtonsList[3],
                           locked: !UserService.getUser().logedIn,
                         ),
+                        VerticalDivider(
+                          color: ColorHelper.getColorHelper(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
+                        ),
                       ],
                     ),
-                  ),
+                  )),
                   Listener(
                       onPointerDown: (event) {
                         if (UserService.getUser().logedIn) {

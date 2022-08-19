@@ -13,8 +13,14 @@ class DataTableCell extends StatelessWidget implements DataTableCellInterface {
   @override
   String name;
 
+  final Color? pickerColor;
+
   DataTableCell(
-      {Key? key, required this.name, this.backgroundColor, this.flex = 3})
+      {Key? key,
+      required this.name,
+      this.backgroundColor,
+      this.flex = 3,
+      this.pickerColor})
       : super(key: key);
 
   @override

@@ -45,9 +45,7 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
                         .defaultBoxShadowColor)
               ],
               color: widget.edit
-                  ? ColorHelper.getColorHelper(context)
-                      .dataTableCellColors
-                      .defaultEditColor
+                  ? ColorHelper.getColorHelper(context).editColor
                   : ColorHelper.getColorHelper(context)
                       .dataTableCellColors
                       .defaultBoxShadowColor,
