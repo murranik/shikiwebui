@@ -65,27 +65,6 @@ class DiscordBotApiService {
     return "";
   }
 
-  static Future<String> registerUser(Administrator admin) async {
-    var headers = {
-      'Content-Type': 'application/json',
-    };
-
-    var data = '''{
-      "nickname": "${admin.nickname}",
-      "email": "${admin.email}",
-      "password": "${admin.password}",
-      "guildId": ${admin.guildId}
-    }''';
-
-    var url = Uri.parse('https://localhost:5001/api/Auth/Register');
-    var res = await post(url, headers: headers, body: data);
-    if (res.statusCode != 200) {
-      throw Exception('http.post error: statusCode= ${res.statusCode}');
-    }
-
-    return "";
-  }
-
   static Future<bool> login(Administrator admin) async {
     var headers = {
       'Content-Type': 'application/json',
@@ -98,7 +77,7 @@ class DiscordBotApiService {
       "guildId": ${admin.guildId}
     }''';
 
-    var url = Uri.parse('https://localhost:5001/api/Auth/Login');
+    var url = Uri.parse('https://localhost:5001/api/Administration');
     var res = await post(url, headers: headers, body: data);
     if (res.statusCode != 200) {
       return false;
