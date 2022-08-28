@@ -28,8 +28,8 @@ class _AuthPageState extends State<AuthPage> {
   List<bool> validationResults = [false, false];
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  late var passwordValidationMessage;
-  late var emailValidationMessage;
+  late String? passwordValidationMessage = "";
+  late String? emailValidationMessage = "";
 
   Future login() async {
     if (emailController.text != "Echi>Hentai") {
