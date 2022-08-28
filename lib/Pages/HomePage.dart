@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         right: 0.5.w,
         bottom: 0,
         widht: 15.w,
-        children: ExpandableServerStatus(debugColor: Colors.transparent));
+        children: const ExpandableServerStatus(debugColor: Colors.transparent));
   }
 
   @override

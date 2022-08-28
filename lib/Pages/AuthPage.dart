@@ -28,8 +28,8 @@ class _AuthPageState extends State<AuthPage> {
   List<bool> validationResults = [false, false];
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var passwordValidationMessage = null;
-  var emailValidationMessage = null;
+  late var passwordValidationMessage;
+  late var emailValidationMessage;
 
   Future login() async {
     if (emailController.text != "Echi>Hentai") {
@@ -57,7 +57,7 @@ class _AuthPageState extends State<AuthPage> {
                 : "Not valid email";
         passwordValidationMessage =
             "${password.length < 8 ? 'lenght must be more than 8' : ''}"
-            " ${password.length > 10 ? 'lenght must less than 10' : ''}"
+            " ${password.length > 12 ? 'lenght must less than 12' : ''}"
             " ${!RegExp(r"(?=.*[A-Z])").hasMatch(password) ? 'Must have uppercase character' : ''}"
             " ${!RegExp(r"(?=.*[a-z])|(?=.*[A-Z])").hasMatch(password) ? 'Must have a character' : ''}";
       }
