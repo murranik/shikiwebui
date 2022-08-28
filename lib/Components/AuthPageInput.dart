@@ -56,7 +56,7 @@ class _AuthPageInputState extends State<AuthPageInput> {
                 onChanged: (text) {
                   if (widget.validationType == ValidationTypes.email) {
                     if (!RegExp(
-                            r"^[a-zA-Zа-яА-Я0-9.a-zA-Zа-яА-Я0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Zа-яА-Я0-9]+\.[a-zA-Zа-яА-Я]+")
+                            r"^[a-zA-Zа-яґєіїА-ЯҐЄІЇ0-9.a-zA-Zа-яґєіїА-ЯҐЄІЇ0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Zа-яґєіїА-ЯҐЄІЇ0-9]+\.[a-zA-Zа-яґєіїА-ЯҐЄІЇ]+")
                         .hasMatch(text)) {
                       setState(() {
                         valid = false;
@@ -69,7 +69,7 @@ class _AuthPageInputState extends State<AuthPageInput> {
                   } else if (widget.validationType ==
                       ValidationTypes.password) {
                     if (!RegExp(
-                            r"^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)[a-zA-Zа-яА-Я\d]{8,12}$")
+                            r"^(?=.*[a-zа-яґєії])(?=.*[A-ZА-ЯҐЄІЇ])(?=.*\d)[a-zA-Zа-яґєіїА-ЯҐЄІЇ\d]{8,12}$")
                         .hasMatch(text)) {
                       setState(() {
                         valid = false;
