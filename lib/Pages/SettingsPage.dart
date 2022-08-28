@@ -113,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                         child: Container(
                                             decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                            stops: [.5, .5],
+                                            stops: const [.5, .5],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                             colors: [

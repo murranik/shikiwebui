@@ -1,5 +1,4 @@
-import 'package:discordbotadminui/Components/DataTableCell/DataTableCell.dart';
-import 'package:discordbotadminui/Components/DataTableCell/DataTableToolsCell.dart';
+import 'package:discordbotadminui/Components/DataTableCells/DataTableCell.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/DiscordRole.dart';

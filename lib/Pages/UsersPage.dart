@@ -1,6 +1,5 @@
-import 'package:discordbotadminui/Components/DataTableCell/DataTableCell.dart';
-import 'package:discordbotadminui/Components/DataTableCell/DataTableTextFieldCell.dart';
-import 'package:discordbotadminui/Components/DataTableCell/DataTableToolsCell.dart';
+import 'package:discordbotadminui/Components/DataTableCells/DataTableCell.dart';
+import 'package:discordbotadminui/Components/DataTableCells/DataTableTextFieldCell.dart';
 import 'package:discordbotadminui/Helpers/ColorHelper.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/DiscordUser.dart';
@@ -45,7 +44,6 @@ class _UsersPageState extends State<UsersPage> {
                   "https://localhost:5001/api/Get/DiscordUser"),
               builder: (BuildContext context,
                   AsyncSnapshot<List<dynamic>> snapshot) {
-                var edit = false;
                 switch (snapshot.connectionState) {
                   case ConnectionState.done:
                     if (snapshot.hasData) {
