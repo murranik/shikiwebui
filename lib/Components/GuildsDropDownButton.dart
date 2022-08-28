@@ -23,11 +23,13 @@ class GuildsDropDownButton extends StatelessWidget {
               case ConnectionState.done:
                 {
                   if (snapshot.data != null) {
-                    guildIdCallback(snapshot.data!.first.id);
+                    if (snapshot.data!.isNotEmpty) {
+                      guildIdCallback(snapshot.data!.first.id);
+                    }
                   }
                   return DropdownButtonHideUnderline(
                       child: DropdownButton2(
-                    items: snapshot.data == null
+                    items: snapshot.data == null || snapshot.data!.isEmpty
                         ? [
                             DropdownMenuItem<String>(
                               value: "No connected guild",
@@ -47,7 +49,7 @@ class GuildsDropDownButton extends StatelessWidget {
                               child: Text(value),
                             );
                           }).toList(),
-                    value: snapshot.data == null
+                    value: snapshot.data == null || snapshot.data!.isEmpty
                         ? "No connected guild"
                         : snapshot.data!.first.name,
                     style: TextStyleHelper.get(context).defaultTextInputStyle,
