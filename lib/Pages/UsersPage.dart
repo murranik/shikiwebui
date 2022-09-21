@@ -1,6 +1,6 @@
 import 'package:discordbotadminui/Components/DataTableCells/DataTableCell.dart';
 import 'package:discordbotadminui/Components/DataTableCells/DataTableTextFieldCell.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/DiscordUser.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
@@ -136,8 +136,8 @@ class _UsersPageState extends State<UsersPage> {
                               width: 20.sp,
                               height: 20.sp,
                               child: CircularProgressIndicator(
-                                color: ColorHelper.getColorHelper(context)
-                                    .activeColor,
+                                color:
+                                    ThemeManager.getTheme(context).activeColor,
                               ),
                             )));
                   default:
@@ -146,7 +146,7 @@ class _UsersPageState extends State<UsersPage> {
                       child: Text("No data default",
                           style: TextStyle(
                               fontSize: 10.sp,
-                              color: ColorHelper.getColorHelper(context)
+                              color: ThemeManager.getTheme(context)
                                   .defaultTextColor)),
                     ));
                 }
@@ -160,7 +160,7 @@ class _UsersPageState extends State<UsersPage> {
         child: Text(
           'Please login first before using this page',
           style: TextStyle(
-              color: ColorHelper.getColorHelper(context).cancelColor,
+              color: ThemeManager.getTheme(context).cancelColor,
               fontSize: 14.sp),
         ),
       );

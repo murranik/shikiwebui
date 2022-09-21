@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:discordbotadminui/Models/AdministrationGuild.dart';
 import 'package:discordbotadminui/Models/Administrator.dart';
+import 'package:discordbotadminui/Models/Audit/CommandCallInfo.dart';
 import 'package:discordbotadminui/Models/DiscordRole.dart';
 import 'package:discordbotadminui/Models/DiscordUser.dart';
+import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:http/http.dart';
 
 class DiscordBotApiService {
@@ -18,6 +20,8 @@ class DiscordBotApiService {
         list.add(DiscordUser.fromMap(element) as T);
       } else if (T == DiscordRole) {
         list.add(DiscordRole.fromMap(element) as T);
+      } else if (T == CommandCallInfo) {
+        list.add(CommandCallInfo.fromMap(element) as T);
       }
     }
 

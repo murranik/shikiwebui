@@ -1,8 +1,9 @@
 import 'package:discordbotadminui/Components/ServerStatus/ExpandableServerStatus.dart';
 import 'package:discordbotadminui/Components/UserPopupMenuItem.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Managers/OverlaysManager.dart';
+import 'package:discordbotadminui/Pages/AuditPage.dart';
 import 'package:discordbotadminui/Pages/NotFoundPage.dart';
 import 'package:discordbotadminui/Pages/RolesPage.dart';
 import 'package:discordbotadminui/Pages/SettingsPage.dart';
@@ -77,20 +78,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    navButtonsList = <Color?>[null, null, null, null];
+    navButtonsList = <Color?>[null, null, null, null, null, null];
     navButtonsList[widget.page - 1] =
-        ColorHelper.getColorHelper(context).activeColor;
+        ThemeManager.getTheme(context).activeColor;
     return Consumer<ThemeProvider>(
         builder: (context, ThemeProvider themeNotifier, child) {
       return Material(
         key: appKey,
-        color: ColorHelper.getColorHelper(context).defaultAppBackGroundColor,
+        color: ThemeManager.getTheme(context).defaultAppBackGroundColor,
         child: Column(children: [
           Expanded(
             flex: 1,
             child: Container(
-              color: ColorHelper.getColorHelper(context)
-                  .defaultNavMenuBackgroundColor,
+              color:
+                  ThemeManager.getTheme(context).defaultNavMenuBackgroundColor,
               padding: EdgeInsets.symmetric(horizontal: 3.sp),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         VerticalDivider(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
                               .defaultNavMenuTextColor
                               .withAlpha(55),
                           width: 0.2.w,
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           locked: !UserService.getUser().logedIn,
                         ),
                         VerticalDivider(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
                               .defaultNavMenuTextColor
                               .withAlpha(55),
                           width: 0.2.w,
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           locked: !UserService.getUser().logedIn,
                         ),
                         VerticalDivider(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
                               .defaultNavMenuTextColor
                               .withAlpha(55),
                           width: 0.2.w,
@@ -148,13 +149,13 @@ class _HomePageState extends State<HomePage> {
                           locked: !UserService.getUser().logedIn,
                         ),
                         VerticalDivider(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
                               .defaultNavMenuTextColor
                               .withAlpha(55),
                           width: 0.2.w,
                         ),
                         NavMenuButton(
-                          text: "Settings",
+                          text: "Statistic",
                           onClick: () {
                             if (UserService.getUser().logedIn) {
                               GoRouter.of(context).go("/home?page=4");
@@ -164,7 +165,39 @@ class _HomePageState extends State<HomePage> {
                           locked: !UserService.getUser().logedIn,
                         ),
                         VerticalDivider(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
+                        ),
+                        NavMenuButton(
+                          text: "Audit",
+                          onClick: () {
+                            if (UserService.getUser().logedIn) {
+                              GoRouter.of(context).go("/home?page=5");
+                            }
+                          },
+                          choosedColor: navButtonsList[4],
+                          locked: !UserService.getUser().logedIn,
+                        ),
+                        VerticalDivider(
+                          color: ThemeManager.getTheme(context)
+                              .defaultNavMenuTextColor
+                              .withAlpha(55),
+                          width: 0.2.w,
+                        ),
+                        NavMenuButton(
+                          text: "Settings",
+                          onClick: () {
+                            if (UserService.getUser().logedIn) {
+                              GoRouter.of(context).go("/home?page=6");
+                            }
+                          },
+                          choosedColor: navButtonsList[5],
+                          locked: !UserService.getUser().logedIn,
+                        ),
+                        VerticalDivider(
+                          color: ThemeManager.getTheme(context)
                               .defaultNavMenuTextColor
                               .withAlpha(55),
                           width: 0.2.w,
@@ -181,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Material(
                         borderRadius: BorderRadius.circular(25),
-                        color: ColorHelper.getColorHelper(context).activeColor,
+                        color: ThemeManager.getTheme(context).activeColor,
                         child: IconButton(
                             key: stickyKey,
                             onPressed: () {
@@ -192,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                             iconSize: 6.sp,
                             icon: Icon(
                               Icons.person,
-                              color: ColorHelper.getColorHelper(context)
+                              color: ThemeManager.getTheme(context)
                                   .defaultNavMenuTextColor,
                             )),
                       )),
@@ -206,30 +239,17 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.transparent,
                 child: Builder(
                   builder: (BuildContext context) {
-                    if (navButtonsList[1] != null) {
+                    if (navButtonsList[0] != null) {
+                      return Container();
+                    } else if (navButtonsList[1] != null) {
                       return const UsersPage();
                     } else if (navButtonsList[2] != null) {
                       return const RolesPage();
-                    } else if (navButtonsList[0] != null) {
-                      return Container();
-                      /*return SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            SizedBox(height: 2.h),
-                            const ServerStatusComponent(
-                                futureFunction:
-                                    DiscordBotApiService.getServerStatus),
-                            SizedBox(height: 2.h),
-                            const ServerStatusComponent(
-                                futureFunction:
-                                    ThemesApiService.getServerStatus),
-                            SizedBox(height: 2.h),
-                          ],
-                        ),
-                      );*/
                     } else if (navButtonsList[3] != null) {
+                      return Container();
+                    } else if (navButtonsList[4] != null) {
+                      return const AuditPage();
+                    } else if (navButtonsList[5] != null) {
                       return const SettingsPage();
                     } else {
                       return const NotFoundPage();

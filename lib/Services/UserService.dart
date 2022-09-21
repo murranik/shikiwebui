@@ -5,9 +5,9 @@ import 'package:discordbotadminui/Services/CacheService.dart';
 
 class UserService {
   static var _user = Administrator(
-      email: '', guildId: 0, nickname: '', password: '', logedIn: false);
+      email: '', guildId: '', nickname: '', password: '', logedIn: false);
 
-  static getUser() => _user;
+  static Administrator getUser() => _user;
 
   static Future login(Administrator administrator) async {
     await CacheService.saveUser(administrator);
@@ -24,6 +24,6 @@ class UserService {
   static Future logout() async {
     await CacheService.removeUser();
     _user = Administrator(
-        email: '', guildId: 0, nickname: '', password: '', logedIn: false);
+        email: '', guildId: '', nickname: '', password: '', logedIn: false);
   }
 }

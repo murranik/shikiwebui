@@ -1,5 +1,5 @@
 class AdministrationGuild {
-  int id;
+  String id;
   String name;
 
   AdministrationGuild({required this.id, required this.name});

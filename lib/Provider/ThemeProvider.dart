@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:discordbotadminui/Services/CacheService.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeProvider() {
-    _currentTheme = ColorHelper.getBasicColorHelper();
-    getPreferences();
+    getThemeFromCache();
   }
 
   List<String> _themes = [];
@@ -20,19 +19,21 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  late ColorHelperData _currentTheme;
+  late CustomThemeData _currentTheme;
 
-  ColorHelperData get currentTheme => _currentTheme;
+  CustomThemeData get currentTheme => _currentTheme;
 
-  set currentTheme(ColorHelperData currentTheme) {
+  set currentTheme(CustomThemeData currentTheme) {
     _currentTheme = currentTheme;
     CacheService.setTheme(_currentTheme).then((value) => notifyListeners());
   }
 
-  getPreferences() {
+  getThemeFromCache() {
     var data = CacheService.getTheme();
     if (data != null) {
-      _currentTheme = ColorHelperData.fromMap(json.decoder.convert(data));
+      _currentTheme = CustomThemeData.fromMap(json.decoder.convert(data));
+    } else {
+      _currentTheme = ThemeManager.getBasicTheme();
     }
     notifyListeners();
   }

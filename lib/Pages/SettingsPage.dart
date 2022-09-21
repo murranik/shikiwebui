@@ -1,8 +1,8 @@
 import 'package:discordbotadminui/Components/CreateThemeComponent.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorHelper.getColorHelper(context)
+                          color: ThemeManager.getTheme(context)
                               .floatingBoxColors
                               .defaultShadowColor,
                           spreadRadius: 5,
@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               const Offset(0, 3), // changes position of shadow
                         ),
                       ],
-                      color: ColorHelper.getColorHelper(context)
+                      color: ThemeManager.getTheme(context)
                           .floatingBoxColors
                           .defaultBackgroundColor,
                     ),
@@ -60,11 +60,11 @@ class _SettingsPageState extends State<SettingsPage> {
                         FutureBuilder(
                           future: ThemesApiService.getThemes(context),
                           builder: (BuildContext context,
-                              AsyncSnapshot<List<ColorHelperData>> snapshot) {
+                              AsyncSnapshot<List<CustomThemeData>> snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return CircularProgressIndicator(
-                                  color: ColorHelper.getColorHelper(context)
+                                  color: ThemeManager.getTheme(context)
                                       .activeColor);
                             } else {
                               if (snapshot.hasData) {
@@ -92,10 +92,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: ColorHelper.getColorHelper(
-                                                      context)
-                                                  .floatingBoxColors
-                                                  .defaultBackgroundColor,
+                                              color:
+                                                  ThemeManager.getTheme(context)
+                                                      .floatingBoxColors
+                                                      .defaultBackgroundColor,
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: Icon(
@@ -119,8 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                             colors: [
                                               snapshot.data![index]
                                                   .defaultAppBackGroundColor,
-                                              snapshot.data![index]
-                                                  .activeColor, // top Right part
+                                              snapshot.data![index].activeColor,
                                             ],
                                           ),
                                         )),
@@ -135,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     style: TextStyleHelper.get(context)
                                         .defaultTextStyle
                                         .withColor(
-                                            ColorHelper.getColorHelper(context)
+                                            ThemeManager.getTheme(context)
                                                 .cancelColor),
                                   ),
                                 );

@@ -1,4 +1,5 @@
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/AdministrationGuild.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
@@ -18,7 +19,8 @@ class GuildsDropDownButton extends StatelessWidget {
       child: FutureBuilder(
           future: DiscordBotApiService.fetchData<AdministrationGuild>(
               "https://localhost:5001/api/Get/SocketGuild"),
-          builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+          builder:
+              (context, AsyncSnapshot<List<AdministrationGuild>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
                 {
@@ -36,7 +38,8 @@ class GuildsDropDownButton extends StatelessWidget {
                               child: Text(
                                 "No connected guild",
                                 style: TextStyleHelper.get(context)
-                                    .defaultTextInputStyle,
+                                    .defaultTextInputStyle
+                                    .withFontSize(6.sp),
                               ),
                             )
                           ]
@@ -46,7 +49,12 @@ class GuildsDropDownButton extends StatelessWidget {
                             .map<DropdownMenuItem<String>>((dynamic value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(
+                                value,
+                                style: TextStyleHelper.get(context)
+                                    .defaultTextInputStyle
+                                    .withFontSize(5.sp),
+                              ),
                             );
                           }).toList(),
                     value: snapshot.data == null || snapshot.data!.isEmpty
@@ -60,14 +68,14 @@ class GuildsDropDownButton extends StatelessWidget {
                             .id);
                       }
                     },
-                    barrierColor: ColorHelper.getColorHelper(context)
+                    barrierColor: ThemeManager.getTheme(context)
                         .dropdownButtonColors
                         .defaultBarrierColor,
                     iconSize: 4.sp,
-                    iconEnabledColor: ColorHelper.getColorHelper(context)
+                    iconEnabledColor: ThemeManager.getTheme(context)
                         .dropdownButtonColors
                         .defaultIconEnableColor,
-                    iconDisabledColor: ColorHelper.getColorHelper(context)
+                    iconDisabledColor: ThemeManager.getTheme(context)
                         .dropdownButtonColors
                         .defaultIconDisabledColor,
                     buttonHeight: 8.h,
@@ -76,13 +84,13 @@ class GuildsDropDownButton extends StatelessWidget {
                     buttonDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: ColorHelper.getColorHelper(context).activeColor,
+                        color: ThemeManager.getTheme(context).activeColor,
                       ),
                       color: Colors.transparent,
                     ),
                     dropdownDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),
-                      color: ColorHelper.getColorHelper(context).activeColor,
+                      color: ThemeManager.getTheme(context).activeColor,
                     ),
                     dropdownMaxHeight: 200,
                     dropdownWidth: 24.w,
@@ -94,7 +102,7 @@ class GuildsDropDownButton extends StatelessWidget {
               case ConnectionState.waiting:
                 {
                   return CircularProgressIndicator(
-                    color: ColorHelper.getColorHelper(context).activeColor,
+                    color: ThemeManager.getTheme(context).activeColor,
                   );
                 }
               default:

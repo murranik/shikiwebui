@@ -106,7 +106,7 @@ class FloatingBoxColors {
   }
 }
 
-class ColorHelperData {
+class CustomThemeData {
   String name;
   String description;
   DataTableCellColors dataTableCellColors;
@@ -120,7 +120,7 @@ class ColorHelperData {
   Color editColor = Colors.orange;
   Color cancelColor;
 
-  ColorHelperData(
+  CustomThemeData(
       {required this.name,
       this.description = '',
       required this.dataTableCellColors,
@@ -134,7 +134,7 @@ class ColorHelperData {
       this.editColor = Colors.white,
       this.cancelColor = Colors.white});
 
-  factory ColorHelperData.fromMap(Map<String, dynamic> json) => ColorHelperData(
+  factory CustomThemeData.fromMap(Map<String, dynamic> json) => CustomThemeData(
         name: json['name'],
         description: json['description'],
         defaultTextColor: Color(int.parse(json['defaultTextColor'])),

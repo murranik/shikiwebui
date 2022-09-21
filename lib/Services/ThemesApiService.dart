@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class ThemesApiService {
-  static Future<List<ColorHelperData>> getThemes(BuildContext context) async {
+  static Future<List<CustomThemeData>> getThemes(BuildContext context) async {
     var request = await get(Uri.parse('https://localhost:7632/api/Themes'));
 
     if (request.statusCode == 200) {
       final data = jsonDecode(request.body) as List;
-      var themes = data.map((e) => ColorHelperData.fromMap(e)).toList();
-      themes.add(ColorHelperData(
+      var themes = data.map((e) => CustomThemeData.fromMap(e)).toList();
+      themes.add(CustomThemeData(
           name: 'add',
           dataTableCellColors: DataTableCellColors(),
           dropdownButtonColors: DropdownButtonColors(),
@@ -22,12 +22,12 @@ class ThemesApiService {
     return [];
   }
 
-  static Future<ColorHelperData?> getTheme(String name) async {
+  static Future<CustomThemeData?> getTheme(String name) async {
     var request =
         await get(Uri.parse('https://localhost:7632/api/Themes/$name'));
 
     if (request.statusCode == 200) {
-      return ColorHelperData.fromMap(jsonDecode(request.body));
+      return CustomThemeData.fromMap(jsonDecode(request.body));
     }
 
     return null;
@@ -44,7 +44,7 @@ class ThemesApiService {
     return null;
   }
 
-  static Future<bool> saveTheme(ColorHelperData newTheme) async {
+  static Future<bool> saveTheme(CustomThemeData newTheme) async {
     var headers = {
       'Content-Type': 'application/json',
     };

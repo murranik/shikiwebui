@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Models/OverlayManagerData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
@@ -34,7 +34,7 @@ class OverlaysManager {
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                                color: ColorHelper.getColorHelper(context)
+                                color: ThemeManager.getTheme(context)
                                     .dataTableCellColors
                                     .defaultBoxShadowColor,
                                 borderRadius: BorderRadius.circular(5)),

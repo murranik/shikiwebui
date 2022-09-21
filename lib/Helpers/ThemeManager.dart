@@ -1,17 +1,17 @@
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ColorHelper {
-  static ColorHelperData getColorHelper(BuildContext context) {
+class ThemeManager {
+  static CustomThemeData getTheme(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
     return themeProvider.currentTheme;
   }
 
-  static ColorHelperData getBasicColorHelper() {
-    return ColorHelperData(
+  static CustomThemeData getBasicTheme() {
+    return CustomThemeData(
       description: 'basic',
       editColor: Colors.orange,
       name: 'basic',
@@ -44,11 +44,11 @@ class ColorHelper {
     );
   }
 
-  static ColorHelperData getThemeCopy(BuildContext context) {
+  static CustomThemeData getThemeCopy(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
 
     final tempTheme = themeProvider.currentTheme;
-    return ColorHelperData(
+    return CustomThemeData(
       name: tempTheme.name,
       dataTableCellColors: DataTableCellColors(
         defaultBorderColor: tempTheme.dataTableCellColors.defaultBorderColor,
@@ -87,8 +87,8 @@ class ColorHelper {
   }
 
   static Color getColorByName(String choosedColor, BuildContext context,
-      {ColorHelperData? theme}) {
-    ColorHelperData? currentTheme;
+      {CustomThemeData? theme}) {
+    CustomThemeData? currentTheme;
     if (theme != null) {
       currentTheme = theme;
     } else {

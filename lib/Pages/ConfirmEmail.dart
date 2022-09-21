@@ -1,6 +1,6 @@
 import 'package:discordbotadminui/Components/Timer.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +32,7 @@ class ConfirmEmailPage extends StatelessWidget {
             GoRouter.of(context).go("/");
           },
           seconds: 5,
-          textColor: ColorHelper.getColorHelper(context).defaultTextColor,
+          textColor: ThemeManager.getTheme(context).defaultTextColor,
           timePrefix: "Redirect after ",
         ),
       ],

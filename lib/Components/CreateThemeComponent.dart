@@ -15,9 +15,9 @@ import 'package:discordbotadminui/Enums/DataTableCellColorType.dart';
 import 'package:discordbotadminui/Enums/DropDownButtonPreviewColorTypes.dart';
 import 'package:discordbotadminui/Enums/ValidationTypes.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:discordbotadminui/Models/DiscordRole.dart';
 import 'package:discordbotadminui/Services/ThemesApiService.dart';
 import 'package:expandable/expandable.dart';
@@ -43,7 +43,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
 
   var pickerColor = Colors.white;
   late void Function(void Function()) updatePreview;
-  late ColorHelperData tempTheme;
+  late CustomThemeData tempTheme;
   final tableData = List.generate(5, (index) {
     var l = (Random().nextDouble() * 100000000000000).round();
     return DiscordRole(discordId: int.parse(l.toString()), name: "Name");
@@ -52,7 +52,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
   var themeNameController = TextEditingController();
   @override
   void initState() {
-    tempTheme = ColorHelper.getThemeCopy(context);
+    tempTheme = ThemeManager.getThemeCopy(context);
     super.initState();
   }
 
@@ -70,7 +70,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
           padding: EdgeInsets.zero,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: ColorHelper.getColorHelper(context)
+              color: ThemeManager.getTheme(context)
                   .floatingBoxColors
                   .defaultBackgroundColor),
           child: IntrinsicHeight(
@@ -93,7 +93,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             expandController: basicColorsExpandController,
                             pickedTextCallBack: (choosedColorText) {
                               choosedColor = choosedColorText;
-                              pickerColor = ColorHelper.getColorByName(
+                              pickerColor = ThemeManager.getColorByName(
                                   choosedColor!, context,
                                   theme: tempTheme);
                               setState(() {});
@@ -119,7 +119,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             pickedTextCallBack: (choosedColorText) {
                               choosedColor = choosedColorText;
 
-                              pickerColor = ColorHelper.getColorByName(
+                              pickerColor = ThemeManager.getColorByName(
                                   choosedColor!, context,
                                   theme: tempTheme);
                               setState(() {});
@@ -140,7 +140,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             pickedTextCallBack: (choosedColorText) {
                               choosedColor = choosedColorText;
 
-                              pickerColor = ColorHelper.getColorByName(
+                              pickerColor = ThemeManager.getColorByName(
                                   choosedColor!, context,
                                   theme: tempTheme);
                               setState(() {});
@@ -162,7 +162,7 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                             pickedTextCallBack: (choosedColorText) {
                               choosedColor = choosedColorText;
 
-                              pickerColor = ColorHelper.getColorByName(
+                              pickerColor = ThemeManager.getColorByName(
                                   choosedColor!, context,
                                   theme: tempTheme);
                               setState(() {});
@@ -184,23 +184,24 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                               hintStyle: TextStyleHelper.get(context)
                                   .defaultTextInputStyle
                                   .apply(
-                                      color: ColorHelper.getColorHelper(context)
+                                      color: ThemeManager.getTheme(context)
                                           .defaultTextColor
                                           .withAlpha(125)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(7),
                                   borderSide: BorderSide(
-                                      color: ColorHelper.getColorHelper(context)
+                                      color: ThemeManager.getTheme(context)
                                           .activeColor)),
                               errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(7),
                                   borderSide: BorderSide(
-                                      color: ColorHelper.getColorHelper(context)
+                                      color: ThemeManager.getTheme(context)
                                           .activeColor)),
                               focusedErrorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(7),
-                                  borderSide: BorderSide(color: ColorHelper.getColorHelper(context).activeColor)),
-                              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(7), borderSide: BorderSide(color: ColorHelper.getColorHelper(context).activeColor))),
+                                  borderSide:
+                                      BorderSide(color: ThemeManager.getTheme(context).activeColor)),
+                              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(7), borderSide: BorderSide(color: ThemeManager.getTheme(context).activeColor))),
                         ),
                         SizedBox(
                           height: 0.5.h,
@@ -307,33 +308,33 @@ class _CreateThemeComponentState extends State<CreateThemeComponent> {
                                       TextButton(
                                           onPressed: () {
                                             pickerColor =
-                                                ColorHelper.getColorByName(
+                                                ThemeManager.getColorByName(
                                                     choosedColor!, context);
                                             setState(() {});
                                           },
                                           child: Text("Reset",
-                                              style: TextStyleHelper.get(
-                                                      context)
-                                                  .defaultTextStyle
-                                                  .withColor(
-                                                    ColorHelper.getColorHelper(
-                                                            context)
-                                                        .cancelColor,
-                                                  ))),
+                                              style:
+                                                  TextStyleHelper.get(context)
+                                                      .defaultTextStyle
+                                                      .withColor(
+                                                        ThemeManager.getTheme(
+                                                                context)
+                                                            .cancelColor,
+                                                      ))),
                                       TextButton(
                                           onPressed: () {
                                             setThemeColor();
                                             updatePreview(() {});
                                           },
                                           child: Text("Apply",
-                                              style: TextStyleHelper.get(
-                                                      context)
-                                                  .defaultTextStyle
-                                                  .withColor(
-                                                    ColorHelper.getColorHelper(
-                                                            context)
-                                                        .activeColor,
-                                                  )))
+                                              style:
+                                                  TextStyleHelper.get(context)
+                                                      .defaultTextStyle
+                                                      .withColor(
+                                                        ThemeManager.getTheme(
+                                                                context)
+                                                            .activeColor,
+                                                      )))
                                     ],
                                   )
                                 ]);

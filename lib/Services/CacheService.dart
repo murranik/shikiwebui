@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:discordbotadminui/Models/Administrator.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheService {
@@ -13,8 +13,9 @@ class CacheService {
 
   static SharedPreferences getPrefs() => _sharedPrefs;
 
-  static Future setTheme(ColorHelperData theme) async {
+  static Future setTheme(CustomThemeData theme) async {
     await _sharedPrefs.setString("theme", json.encoder.convert(theme.toMap()));
+    var m = _sharedPrefs.getString("theme")!;
   }
 
   static String? getTheme() {

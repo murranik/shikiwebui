@@ -1,7 +1,5 @@
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableCategoryItem.dart';
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableListView.dart';
 import 'package:discordbotadminui/Components/ServerStatus/ExpandableServerStatusItem.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
 import 'package:discordbotadminui/Services/ThemesApiService.dart';
@@ -41,10 +39,10 @@ class _ExpandableServerStatusState extends State<ExpandableServerStatus> {
                     children: const [
                       ExpandableServerStatusItem(
                           futureFunction: ThemesApiService.getServerStatus,
-                          serverName: "Theme service"),
+                          serverName: "Theme server"),
                       ExpandableServerStatusItem(
                           futureFunction: DiscordBotApiService.getServerStatus,
-                          serverName: "Discord bot service"),
+                          serverName: "Discord bot server"),
                     ]),
               ),
             ),
@@ -56,7 +54,7 @@ class _ExpandableServerStatusState extends State<ExpandableServerStatus> {
             },
             child: Container(
               padding: EdgeInsets.only(left: 0.5.w),
-              color: ColorHelper.getColorHelper(context)
+              color: ThemeManager.getTheme(context)
                   .floatingBoxColors
                   .defaultShadowColor,
               child: Row(
@@ -70,13 +68,11 @@ class _ExpandableServerStatusState extends State<ExpandableServerStatus> {
                   !expandController.value
                       ? Icon(
                           Icons.arrow_drop_up,
-                          color:
-                              ColorHelper.getColorHelper(context).activeColor,
+                          color: ThemeManager.getTheme(context).activeColor,
                         )
                       : Icon(
                           Icons.arrow_drop_down,
-                          color:
-                              ColorHelper.getColorHelper(context).activeColor,
+                          color: ThemeManager.getTheme(context).activeColor,
                         )
                 ],
               ),

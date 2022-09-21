@@ -1,14 +1,14 @@
 import 'package:discordbotadminui/Enums/DropDownButtonPreviewColorTypes.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class DropDownButtonPreview extends StatefulWidget {
   final Color pickerColor;
-  final ColorHelperData theme;
+  final CustomThemeData theme;
   final DropDownButtonPreviewColorTypes colorType;
   const DropDownButtonPreview(
       {Key? key,

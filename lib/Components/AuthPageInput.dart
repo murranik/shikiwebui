@@ -1,6 +1,6 @@
 import 'package:discordbotadminui/Enums/ValidationTypes.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -101,12 +101,12 @@ class _AuthPageInputState extends State<AuthPageInput> {
                           valid
                               ? Icon(
                                   Icons.done,
-                                  color: ColorHelper.getColorHelper(context)
+                                  color: ThemeManager.getTheme(context)
                                       .activeColor,
                                 )
                               : Icon(
                                   Icons.close,
-                                  color: ColorHelper.getColorHelper(context)
+                                  color: ThemeManager.getTheme(context)
                                       .cancelColor,
                                 ),
                         ],
@@ -118,23 +118,20 @@ class _AuthPageInputState extends State<AuthPageInput> {
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(
-                            color: ColorHelper.getColorHelper(context)
-                                .activeColor)),
+                            color: ThemeManager.getTheme(context).activeColor)),
                     errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(
-                            color: ColorHelper.getColorHelper(context)
-                                .activeColor)),
+                            color: ThemeManager.getTheme(context).activeColor)),
                     focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(
-                            color: ColorHelper.getColorHelper(context)
-                                .activeColor)),
+                            color: ThemeManager.getTheme(context).activeColor)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(7),
                         borderSide: BorderSide(
-                            color: ColorHelper.getColorHelper(context)
-                                .activeColor))),
+                            color:
+                                ThemeManager.getTheme(context).activeColor))),
               ),
             ),
           ],

@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -26,7 +26,7 @@ class ExpandableItem extends StatelessWidget {
                       .defaultExpandableListItemTextStyle),
               Icon(
                 Icons.arrow_forward_ios,
-                color: ColorHelper.getColorHelper(context).activeColor,
+                color: ThemeManager.getTheme(context).activeColor,
                 size: 4.sp,
               )
             ],
