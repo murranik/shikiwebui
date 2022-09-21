@@ -1,5 +1,5 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Interfaces/DataTableCellInterface.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +42,13 @@ class DataTableTextFieldCell extends StatelessWidget
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: ColorHelper.getColorHelper(context)
+                    color: ThemeManager.getTheme(context)
                         .dataTableCellColors
                         .defaultBoxShadowColor)
               ],
               color: backgroundColor ?? Colors.transparent,
               border: Border.fromBorderSide(BorderSide(
-                color: ColorHelper.getColorHelper(context)
+                color: ThemeManager.getTheme(context)
                     .dataTableCellColors
                     .defaultBorderColor,
                 width: 0.5.sp,
@@ -76,7 +76,7 @@ class DataTableTextFieldCell extends StatelessWidget
                       padding: EdgeInsets.zero,
                       icon: Icon(
                         Icons.check,
-                        color: ColorHelper.getColorHelper(context).activeColor,
+                        color: ThemeManager.getTheme(context).activeColor,
                       ),
                       onPressed: () async {
                         enable = false;
@@ -90,7 +90,7 @@ class DataTableTextFieldCell extends StatelessWidget
                       padding: EdgeInsets.zero,
                       icon: Icon(
                         Icons.edit,
-                        color: ColorHelper.getColorHelper(context).editColor,
+                        color: ThemeManager.getTheme(context).editColor,
                       ),
                       onPressed: () {
                         enable = true;

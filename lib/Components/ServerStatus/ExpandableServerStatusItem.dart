@@ -1,9 +1,8 @@
 import 'package:discordbotadminui/Components/Timer.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class ExpandableServerStatusItem extends StatefulWidget {
   final Function futureFunction;
@@ -37,14 +36,14 @@ class _ExpandableServerStatusItemState
                 widget.serverName,
                 style: TextStyleHelper.get(context)
                     .defaultServerStatusTextStyle
-                    .withColor(ColorHelper.getColorHelper(context).cancelColor),
+                    .withColor(ThemeManager.getTheme(context).cancelColor),
               ),
               RefreshTimer(
                   onEnd: () {
                     setState(() {});
                   },
                   seconds: 30,
-                  textColor: ColorHelper.getColorHelper(context).cancelColor),
+                  textColor: ThemeManager.getTheme(context).cancelColor),
             ],
           );
         }

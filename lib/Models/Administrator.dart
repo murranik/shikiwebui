@@ -2,7 +2,7 @@ class Administrator {
   String nickname;
   String email;
   String password;
-  int guildId;
+  String guildId;
   bool logedIn;
 
   Administrator(

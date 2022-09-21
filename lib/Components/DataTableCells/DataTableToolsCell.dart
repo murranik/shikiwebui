@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Interfaces/DataTableCellInterface.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -40,17 +40,17 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: ColorHelper.getColorHelper(context)
+                    color: ThemeManager.getTheme(context)
                         .dataTableCellColors
                         .defaultBoxShadowColor)
               ],
               color: widget.edit
-                  ? ColorHelper.getColorHelper(context).editColor
-                  : ColorHelper.getColorHelper(context)
+                  ? ThemeManager.getTheme(context).editColor
+                  : ThemeManager.getTheme(context)
                       .dataTableCellColors
                       .defaultBoxShadowColor,
               border: Border.fromBorderSide(BorderSide(
-                color: ColorHelper.getColorHelper(context)
+                color: ThemeManager.getTheme(context)
                     .dataTableCellColors
                     .defaultBorderColor,
                 width: 0.5.sp,
@@ -71,8 +71,8 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
                     icon: Icon(
                       widget.edit ? Icons.cancel : Icons.edit,
                       color: widget.edit
-                          ? ColorHelper.getColorHelper(context).cancelColor
-                          : ColorHelper.getColorHelper(context).activeColor,
+                          ? ThemeManager.getTheme(context).cancelColor
+                          : ThemeManager.getTheme(context).activeColor,
                     )),
               ),
               if (widget.edit)
@@ -91,7 +91,7 @@ class _DataTableToolsCellState extends State<DataTableToolsCell> {
                       },
                       icon: Icon(
                         Icons.check_circle_outline,
-                        color: ColorHelper.getColorHelper(context).activeColor,
+                        color: ThemeManager.getTheme(context).activeColor,
                       )),
                 )
             ],

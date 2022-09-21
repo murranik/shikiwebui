@@ -22,6 +22,7 @@ dependencies:
   flutter_expanded_tile: ^0.3.6
   google_fonts: 3.0.1
   shared_preferences: ^2.0.15
+  intl: ^0.17.0
   
 dev_dependencies:
   flutter_test:

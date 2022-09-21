@@ -1,5 +1,5 @@
 import 'package:discordbotadminui/Components/DataTableCells/DataTableCell.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/DiscordRole.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
@@ -51,11 +51,10 @@ class _RolesPageState extends State<RolesPage> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       DataTableCell(
-                                        name: discordRole.name.toString(),
+                                        name: discordRole.discordId.toString(),
                                       ),
                                       DataTableCell(
-                                          name:
-                                              discordRole.discordId.toString()),
+                                          name: discordRole.name.toString()),
                                     ],
                                   )
                               ],
@@ -67,7 +66,7 @@ class _RolesPageState extends State<RolesPage> {
                       return Expanded(
                           child: Center(
                         child: Text(
-                          "No data",
+                          "No connection",
                           style: TextStyleHelper.get(context).defaultTextStyle,
                         ),
                       ));
@@ -80,8 +79,8 @@ class _RolesPageState extends State<RolesPage> {
                               width: 20.sp,
                               height: 20.sp,
                               child: CircularProgressIndicator(
-                                color: ColorHelper.getColorHelper(context)
-                                    .activeColor,
+                                color:
+                                    ThemeManager.getTheme(context).activeColor,
                               ),
                             )));
                   default:
@@ -89,7 +88,7 @@ class _RolesPageState extends State<RolesPage> {
                         child: Text("No data default",
                             style: TextStyle(
                                 fontSize: 10.sp,
-                                color: ColorHelper.getColorHelper(context)
+                                color: ThemeManager.getTheme(context)
                                     .defaultTextColor)));
                 }
               },
@@ -102,7 +101,7 @@ class _RolesPageState extends State<RolesPage> {
         child: Text(
           'Please login first before using this page',
           style: TextStyle(
-              color: ColorHelper.getColorHelper(context).cancelColor,
+              color: ThemeManager.getTheme(context).cancelColor,
               fontSize: 14.sp),
         ),
       );

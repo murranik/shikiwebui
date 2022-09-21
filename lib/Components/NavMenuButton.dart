@@ -1,7 +1,7 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,7 +12,7 @@ class NavMenuButton extends StatelessWidget {
   final bool locked;
   final Color? activeColor;
   final Color? defaultNavMenuTextStyle;
-  final ColorHelperData? theme;
+  final CustomThemeData? theme;
   const NavMenuButton(
       {Key? key,
       required this.text,

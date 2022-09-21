@@ -1,5 +1,5 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Interfaces/DataTableCellInterface.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +33,13 @@ class DataTableCell extends StatelessWidget implements DataTableCellInterface {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  color: ColorHelper.getColorHelper(context)
+                  color: ThemeManager.getTheme(context)
                       .dataTableCellColors
                       .defaultBoxShadowColor)
             ],
             color: backgroundColor ?? Colors.transparent,
             border: Border.fromBorderSide(BorderSide(
-              color: ColorHelper.getColorHelper(context)
+              color: ThemeManager.getTheme(context)
                   .dataTableCellColors
                   .defaultBorderColor,
               width: 0.5.sp,

@@ -1,12 +1,12 @@
-import 'package:discordbotadminui/Helpers/ColorHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 class TextStyleHelper {
   static TextStyleHelperData get(BuildContext context,
-      {ColorHelperData? theme}) {
+      {CustomThemeData? theme}) {
     if (theme != null) {
       return TextStyleHelperData(
           defaultTextStyle:
@@ -30,30 +30,29 @@ class TextStyleHelper {
     return TextStyleHelperData(
         defaultTextStyle: TextStyle(
             fontSize: 6.sp,
-            color: ColorHelper.getColorHelper(context).defaultTextColor),
+            color: ThemeManager.getTheme(context).defaultTextColor),
         defaultDataTableInputTextStyle: TextStyle(
             fontSize: 6.sp,
-            color: ColorHelper.getColorHelper(context)
+            color: ThemeManager.getTheme(context)
                 .dataTableCellColors
                 .defaultInputTextColor),
         defaultNavMenuTextStyle: TextStyle(
             fontSize: 4.sp,
-            color: ColorHelper.getColorHelper(context).defaultNavMenuTextColor),
+            color: ThemeManager.getTheme(context).defaultNavMenuTextColor),
         defaultServerStatusTextStyle: TextStyle(
-            fontSize: 4.sp,
-            color: ColorHelper.getColorHelper(context).activeColor),
+            fontSize: 4.sp, color: ThemeManager.getTheme(context).activeColor),
         defaultTextInputStyle: GoogleFonts.lato(
           textStyle: TextStyle(
               fontSize: 4.sp,
-              color: ColorHelper.getColorHelper(context).defaultTextColor),
+              color: ThemeManager.getTheme(context).defaultTextColor),
         ),
         createThemeComponentStyles: CreateThemeComponentStyles(
             defaultExpandableListCategoryTextStyle: TextStyle(
                 fontSize: 4.sp,
-                color: ColorHelper.getColorHelper(context).defaultTextColor),
+                color: ThemeManager.getTheme(context).defaultTextColor),
             defaultExpandableListItemTextStyle: TextStyle(
                 fontSize: 4.sp,
-                color: ColorHelper.getColorHelper(context).defaultTextColor)));
+                color: ThemeManager.getTheme(context).defaultTextColor)));
   }
 }
 

@@ -1,12 +1,12 @@
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
-import 'package:discordbotadminui/Models/ColorHelperData.dart';
+import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class FloatingBoxColorPreview extends StatelessWidget {
   final Color pickerColor;
   final bool changeBackGround;
-  final ColorHelperData theme;
+  final CustomThemeData theme;
 
   const FloatingBoxColorPreview(
       {Key? key,
