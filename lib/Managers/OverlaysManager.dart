@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Models/OverlayManagerData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
