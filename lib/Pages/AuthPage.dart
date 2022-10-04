@@ -4,7 +4,7 @@ import 'package:discordbotadminui/Components/GuildsDropDownButton.dart';
 import 'package:discordbotadminui/Components/AuthPageInput.dart';
 import 'package:discordbotadminui/Enums/ValidationTypes.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/Administrator.dart';
 import 'package:discordbotadminui/Provider/AuthPageProvider.dart';

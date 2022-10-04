@@ -15,7 +15,7 @@ import 'package:discordbotadminui/Enums/DataTableCellColorType.dart';
 import 'package:discordbotadminui/Enums/DropDownButtonPreviewColorTypes.dart';
 import 'package:discordbotadminui/Enums/ValidationTypes.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/CustomThemeData.dart';
 import 'package:discordbotadminui/Models/DiscordRole.dart';

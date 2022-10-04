@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Pages/AuthPage.dart';
 import 'package:discordbotadminui/Pages/ConfirmEmail.dart';
 import 'package:discordbotadminui/Pages/HomePage.dart';
@@ -19,7 +19,6 @@ import 'package:sizer/sizer.dart';
 
 void main() async {
   await CacheService.init();
-  await CacheService.setTheme(ThemeManager.getBasicTheme());
   UserService.loadUser();
   runApp(const MyApp());
 }

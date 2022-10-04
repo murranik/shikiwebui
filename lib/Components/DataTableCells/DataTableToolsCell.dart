@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Interfaces/DataTableCellInterface.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';

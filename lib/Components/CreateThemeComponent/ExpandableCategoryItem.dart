@@ -1,4 +1,4 @@
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';

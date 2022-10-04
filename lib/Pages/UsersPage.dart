@@ -1,6 +1,6 @@
 import 'package:discordbotadminui/Components/DataTableCells/DataTableCell.dart';
 import 'package:discordbotadminui/Components/DataTableCells/DataTableTextFieldCell.dart';
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/DiscordUser.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';

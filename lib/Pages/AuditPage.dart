@@ -1,5 +1,5 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Models/Audit/CommandCallInfo.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
@@ -240,7 +240,7 @@ class _AuditPageState extends State<AuditPage> {
                         margin: EdgeInsets.all(1.sp),
                         padding: EdgeInsets.all(1.sp),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
                               color: ThemeManager.getTheme(context)
@@ -257,6 +257,54 @@ class _AuditPageState extends State<AuditPage> {
                         ),
                         child: Column(
                           children: [
+                            if (pickedData.id != 'empty')
+                              if (true)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'The result of calling - ',
+                                      style: TextStyleHelper.get(context)
+                                          .defaultTextStyle
+                                          .withFontSize(5.sp),
+                                    ),
+                                    Text(
+                                      pickedData.commandName.toUpperCase(),
+                                      style: TextStyleHelper.get(context)
+                                          .defaultTextStyle
+                                          .withFontSize(5.sp)
+                                          .withColor(
+                                              ThemeManager.getTheme(context)
+                                                  .activeColor),
+                                    ),
+                                    Text(
+                                      ' command',
+                                      style: TextStyleHelper.get(context)
+                                          .defaultTextStyle
+                                          .withFontSize(5.sp),
+                                    ),
+                                  ],
+                                ),
+                            if (pickedData.id != 'empty')
+                              if (true)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Owner and date",
+                                      style: TextStyleHelper.get(context)
+                                          .defaultTextStyle
+                                          .withFontSize(5.sp),
+                                    )
+                                  ],
+                                ),
+                            if (pickedData.id != 'empty')
+                              if (true)
+                                Divider(
+                                  color: Colors.black,
+                                  thickness: 1,
+                                  height: 10,
+                                ),
                             if (pickedData.id != 'empty')
                               if (true)
                                 Row(
@@ -340,17 +388,13 @@ class _AuditPageState extends State<AuditPage> {
                                     )
                                   ],
                                 ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  pickedData.commandName,
-                                  style: TextStyleHelper.get(context)
-                                      .defaultTextStyle
-                                      .withFontSize(5.sp),
-                                )
-                              ],
-                            )
+                            if (pickedData.id != 'empty')
+                              if (true)
+                                Divider(
+                                  color: Colors.black,
+                                  thickness: 1,
+                                  height: 10,
+                                ),
                           ],
                         ),
                       )),

@@ -1,6 +1,6 @@
 import 'package:discordbotadminui/Components/ServerStatus/ExpandableServerStatus.dart';
 import 'package:discordbotadminui/Components/UserPopupMenuItem.dart';
-import 'package:discordbotadminui/Helpers/ThemeManager.dart';
+import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:discordbotadminui/Managers/OverlaysManager.dart';
 import 'package:discordbotadminui/Pages/AuditPage.dart';
