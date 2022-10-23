@@ -15,7 +15,6 @@ class CacheService {
 
   static Future setTheme(CustomThemeData theme) async {
     await _sharedPrefs.setString("theme", json.encoder.convert(theme.toMap()));
-    var m = _sharedPrefs.getString("theme")!;
   }
 
   static String? getTheme() {

@@ -1,3 +1,4 @@
+import 'package:discordbotadminui/Components/AuditPageComponents/AuditButton.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
@@ -17,7 +18,6 @@ class AuditPage extends StatefulWidget {
 
 class _AuditPageState extends State<AuditPage> {
   bool minimizeCommandView = false;
-  bool showCommands = true;
   List<CommandCallInfo> data = [];
   CommandCallInfo pickedData = CommandCallInfo(
     id: "empty",
@@ -25,6 +25,8 @@ class _AuditPageState extends State<AuditPage> {
     date: DateTime.now(),
     guildName: '',
     userId: 913201,
+    commandParams: [],
+    commandResult: '',
   );
   var load = true;
 
@@ -72,69 +74,15 @@ class _AuditPageState extends State<AuditPage> {
                           Row(
                             //buttons
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color: ThemeManager.getTheme(context)
-                                          .activeColor,
-                                      width: 0.5.sp),
-                                ),
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .all(ThemeManager.getTheme(context)
-                                              .activeColor
-                                              .withOpacity(
-                                                  showCommands ? 0.3 : 0.0)),
-                                      padding: MaterialStateProperty.all(
-                                          EdgeInsets.zero)),
-                                  onPressed: () => setState(() {
-                                    showCommands = true;
-                                  }),
-                                  child: Text(
-                                    'Commands',
-                                    style: TextStyleHelper.get(context)
-                                        .defaultTextStyle
-                                        .withFontSize(5.sp),
-                                  ),
-                                ),
-                              )),
-                              Expanded(
-                                  child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color: ThemeManager.getTheme(context)
-                                          .activeColor,
-                                      width: 0.5.sp),
-                                ),
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .all(ThemeManager.getTheme(context)
-                                              .activeColor
-                                              .withOpacity(
-                                                  showCommands ? 0.0 : 0.3)),
-                                      padding: MaterialStateProperty.all(
-                                          EdgeInsets.zero)),
-                                  onPressed: () => setState(() {
-                                    showCommands = false;
-                                  }),
-                                  child: Text(
-                                    'Errors',
-                                    style: TextStyleHelper.get(context)
-                                        .defaultTextStyle
-                                        .withFontSize(5.sp),
-                                  ),
-                                ),
-                              )),
+                            children: const [
+                              AuditButton(
+                                buttonTitle: 'Commands',
+                                isPressed: true,
+                              ),
                             ],
                           ),
                           Expanded(
-                              //data list
+                              //Todo data list
                               child: Scrollbar(
                             child: SingleChildScrollView(
                               child: Column(
@@ -165,7 +113,12 @@ class _AuditPageState extends State<AuditPage> {
                                                   vertical: 0.3.h,
                                                   horizontal: 0.15.w),
                                               decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                                  color: command.errorMessage ==
+                                                          null
+                                                      ? Colors.white
+                                                      : ThemeManager.getTheme(
+                                                              context)
+                                                          .defaultAppBackGroundColor,
                                                   boxShadow: [
                                                     BoxShadow(
                                                         color: ThemeManager
@@ -187,41 +140,64 @@ class _AuditPageState extends State<AuditPage> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        command.commandName,
-                                                        style: TextStyleHelper
-                                                                .get(context)
-                                                            .defaultTextStyle
-                                                            .withFontSize(5.sp),
-                                                      ),
-                                                      Text(
-                                                        ' ${command.date.toString().replaceFirst(":00.000", "")}',
-                                                        style: TextStyleHelper
-                                                                .get(context)
-                                                            .defaultTextStyle
-                                                            .withFontSize(5.sp),
-                                                      ),
-                                                    ],
+                                                  Expanded(
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          command.commandName,
+                                                          style: TextStyleHelper
+                                                                  .get(context)
+                                                              .defaultTextStyle
+                                                              .withFontSize(
+                                                                  5.sp),
+                                                        ),
+                                                        Text(
+                                                          ' ${command.date.toString().replaceFirst(":00.000", "")}',
+                                                          style: TextStyleHelper
+                                                                  .get(context)
+                                                              .defaultTextStyle
+                                                              .withFontSize(
+                                                                  5.sp),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  Icon(
-                                                    !showCommands
-                                                        ? Icons.error_outline
-                                                        : pickedData.id ==
-                                                                command.id
-                                                            ? Icons
-                                                                .keyboard_double_arrow_right_outlined
-                                                            : Icons
-                                                                .check_circle_outline,
-                                                    color: !showCommands
-                                                        ? ThemeManager.getTheme(
-                                                                context)
-                                                            .cancelColor
-                                                        : ThemeManager.getTheme(
-                                                                context)
-                                                            .activeColor,
-                                                    size: 5.sp,
+                                                  Builder(
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      late IconData icon;
+                                                      if (pickedData.id ==
+                                                          command.id) {
+                                                        icon = Icons
+                                                            .keyboard_double_arrow_right_outlined;
+                                                      } else {
+                                                        if (command
+                                                                .errorMessage ==
+                                                            null) {
+                                                          icon = Icons
+                                                              .check_circle_outline;
+                                                        } else {
+                                                          icon = Icons
+                                                              .error_outline;
+                                                        }
+                                                      }
+
+                                                      return Icon(
+                                                        icon,
+                                                        color: command
+                                                                    .errorMessage ==
+                                                                null
+                                                            ? ThemeManager
+                                                                    .getTheme(
+                                                                        context)
+                                                                .activeColor
+                                                            : ThemeManager
+                                                                    .getTheme(
+                                                                        context)
+                                                                .cancelColor,
+                                                        size: 5.sp,
+                                                      );
+                                                    },
                                                   )
                                                 ],
                                               ),
@@ -248,13 +224,13 @@ class _AuditPageState extends State<AuditPage> {
                                   .defaultShadowColor,
                               spreadRadius: 5,
                               blurRadius: 7,
-                              offset: const Offset(
-                                  0, 0), // changes position of shadow
+                              offset: const Offset(0, 0),
                             ),
                           ],
                           color: ThemeManager.getTheme(context)
                               .defaultAppBackGroundColor,
                         ),
+                        //Todo refactor
                         child: Column(
                           children: [
                             if (pickedData.id != 'empty')
@@ -300,7 +276,7 @@ class _AuditPageState extends State<AuditPage> {
                                 ),
                             if (pickedData.id != 'empty')
                               if (true)
-                                Divider(
+                                const Divider(
                                   color: Colors.black,
                                   thickness: 1,
                                   height: 10,
@@ -390,7 +366,7 @@ class _AuditPageState extends State<AuditPage> {
                                 ),
                             if (pickedData.id != 'empty')
                               if (true)
-                                Divider(
+                                const Divider(
                                   color: Colors.black,
                                   thickness: 1,
                                   height: 10,
