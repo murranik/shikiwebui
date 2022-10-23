@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:discordbotadminui/Components/AuthPageInput.dart';
 import 'package:discordbotadminui/Components/ColorTypesPreviews/ActiveColorPreview.dart';
 import 'package:discordbotadminui/Components/ColorTypesPreviews/CancelColorPreview.dart';
 import 'package:discordbotadminui/Components/ColorTypesPreviews/DataTablePreview.dart';
@@ -9,11 +8,10 @@ import 'package:discordbotadminui/Components/ColorTypesPreviews/NavMenuBackgroun
 import 'package:discordbotadminui/Components/ColorTypesPreviews/NavMenuTextColorPreview.dart';
 import 'package:discordbotadminui/Components/ColorTypesPreviews/FloatingBoxColorPreview.dart';
 import 'package:discordbotadminui/Components/ColorTypesPreviews/TextColorPreview.dart';
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableCategoryItem.dart';
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableListView.dart';
+import 'package:discordbotadminui/Components/CreateThemeComponents/ExpandableCategoryItem.dart';
+import 'package:discordbotadminui/Components/CreateThemeComponents/ExpandableListView.dart';
 import 'package:discordbotadminui/Enums/DataTableCellColorType.dart';
 import 'package:discordbotadminui/Enums/DropDownButtonPreviewColorTypes.dart';
-import 'package:discordbotadminui/Enums/ValidationTypes.dart';
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Managers/ThemeManager.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';

@@ -1,6 +1,5 @@
-import 'package:discordbotadminui/Components/CreateThemeComponent/ExpandableItem.dart';
+import 'package:discordbotadminui/Components/CreateThemeComponents/ExpandableItem.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableListView extends StatelessWidget {

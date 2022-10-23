@@ -13,7 +13,7 @@ class DiscordBotApiService {
     List<T> list = [];
     var data = json.decode(request.body);
 
-    for (var element in data) {
+    for (Map<String, dynamic> element in data) {
       if (T == AdministrationGuild) {
         list.add(AdministrationGuild.fromMap(element) as T);
       } else if (T == DiscordUser) {
