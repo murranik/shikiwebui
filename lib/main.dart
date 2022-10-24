@@ -20,6 +20,7 @@ import 'package:sizer/sizer.dart';
 void main() async {
   await CacheService.init();
   UserService.loadUser();
+  await CacheService.setTheme(ThemeManager.getBasicTheme());
   runApp(const MyApp());
 }
 
