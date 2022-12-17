@@ -1,7 +1,6 @@
 import 'package:discordbotadminui/Extensions/TextStyleExtension.dart';
 import 'package:discordbotadminui/Helpers/TextStyleHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 
 class NotFoundPage extends StatelessWidget {
@@ -21,7 +20,7 @@ class NotFoundPage extends StatelessWidget {
           textAlign: TextAlign.center,
         )),
         TextButton(
-            onPressed: () => (GoRouter.of(context).go("/")),
+            onPressed: () {},
             child: Text(
               "home",
               style: TextStyleHelper.get(context).defaultTextStyle,

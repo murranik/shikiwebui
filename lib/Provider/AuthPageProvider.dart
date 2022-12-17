@@ -2,7 +2,6 @@ import 'package:discordbotadminui/Models/Administrator.dart';
 import 'package:discordbotadminui/Services/DiscordBotApiService.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthPageControllers {
   final emailController = TextEditingController();
@@ -44,7 +43,6 @@ class AuthPageProvider extends ChangeNotifier {
         if (res) {
           UserService.login(admin);
           // ignore: use_build_context_synchronously
-          GoRouter.of(context).push("/home?page=1");
         }
       } else {
         final password = _authPageControllers.passwordController.text;
@@ -70,7 +68,6 @@ class AuthPageProvider extends ChangeNotifier {
           password: '',
           logedIn: true));
       // ignore: use_build_context_synchronously
-      GoRouter.of(context).push("/home?page=1");
     }
   }
 }

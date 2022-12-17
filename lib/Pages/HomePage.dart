@@ -12,7 +12,6 @@ import 'package:discordbotadminui/Provider/ThemeProvider.dart';
 import 'package:discordbotadminui/Services/UserService.dart';
 import 'package:flutter/material.dart';
 import 'package:discordbotadminui/Components/NavMenuButton.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,7 +49,6 @@ class _HomePageState extends State<HomePage> {
                   everlay.overlayEntry!.remove();
                 }
                 OverlaysManager.overlays.clear();
-                GoRouter.of(context).go("/");
               },
               text: "Logout",
             )
@@ -109,9 +107,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Home",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=1");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[0],
                           locked: !UserService.getUser().logedIn,
@@ -125,9 +121,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Users",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=2");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[1],
                           locked: !UserService.getUser().logedIn,
@@ -141,9 +135,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Roles",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=3");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[2],
                           locked: !UserService.getUser().logedIn,
@@ -157,9 +149,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Statistic",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=4");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[3],
                           locked: !UserService.getUser().logedIn,
@@ -173,9 +163,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Audit",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=5");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[4],
                           locked: !UserService.getUser().logedIn,
@@ -189,9 +177,7 @@ class _HomePageState extends State<HomePage> {
                         NavMenuButton(
                           text: "Settings",
                           onClick: () {
-                            if (UserService.getUser().logedIn) {
-                              GoRouter.of(context).go("/home?page=6");
-                            }
+                            if (UserService.getUser().logedIn) {}
                           },
                           choosedColor: navButtonsList[5],
                           locked: !UserService.getUser().logedIn,
@@ -219,7 +205,6 @@ class _HomePageState extends State<HomePage> {
                             key: stickyKey,
                             onPressed: () {
                               if (!UserService.getUser().logedIn) {
-                                GoRouter.of(context).go("/");
                               } else {}
                             },
                             iconSize: 6.sp,
